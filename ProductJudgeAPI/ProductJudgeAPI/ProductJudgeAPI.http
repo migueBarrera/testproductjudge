@@ -1,0 +1,6 @@
+@ProductJudgeAPI_HostAddress = http://localhost:32768
+
+GET {{ProductJudgeAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
