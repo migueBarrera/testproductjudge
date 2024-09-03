@@ -5,11 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ProductJudgeMobile"
     Shell.FlyoutBehavior="Disabled"
+    xmlns:login="clr-namespace:ProductJudgeMobile.Features.Login"
+    xmlns:main="clr-namespace:ProductJudgeMobile.Features.MainPage"
+    xmlns:listProducts="clr-namespace:ProductJudgeMobile.Features.ListProducts"
     Title="ProductJudgeMobile">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Login"
+        ContentTemplate="{DataTemplate login:LoginPage}" />
+
+    <ShellContent
+        Title="Main"
+        ContentTemplate="{DataTemplate main:MainPage}"/>
+
+    <ShellContent
+        Title="ListProducts"
+        ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />
 
 </Shell>
