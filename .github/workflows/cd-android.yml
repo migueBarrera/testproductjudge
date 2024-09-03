@@ -69,3 +69,15 @@ jobs:
     
     - name: Publish MAUI Android AAB
       run: dotnet publish ${{inputs.project-file}} -c ${{ inputs.build-config }} -f ${{ inputs.dotnet-version-target }}-android /p:AndroidPackageFormats=aab /p:AndroidKeyStore=true /p:AndroidSigningKeyStore=ourkeystore.jks /p:AndroidSigningKeyAlias=${{secrets.keystore-alias}} /p:AndroidSigningKeyPass="${{ secrets.keystore-password }}" /p:AndroidSigningStorePass="${{ secrets.keystore-password }}" --no-restore
+
+    - name: 🔍 Get generated APK
+      run: |
+        $apkPath = Get-ChildItem -Recurse -Filter *.aab | Select-Object -First 1 -ExpandProperty FullName
+        echo "APK_PATH=$apkPath" >> $env:GITHUB_ENV
+      shell: pwsh
+
+    - name: 📤 Upload Release APKs to Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        path: ${{ env.APK_PATH }}
+        compression-level: 0 
