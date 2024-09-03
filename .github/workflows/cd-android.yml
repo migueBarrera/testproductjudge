@@ -36,11 +36,11 @@ jobs:
 
     steps:
     - name: Setup .NET ${{ inputs.dotnet-version }}
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
   
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout the code
   
     # This step might be obsolete at some point as .NET MAUI workloads 
