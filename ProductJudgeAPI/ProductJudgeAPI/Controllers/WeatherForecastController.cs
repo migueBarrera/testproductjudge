@@ -1,4 +1,7 @@
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
+using ProductJudgeAPI.Context;
+using System.Threading;
 
 namespace ProductJudgeAPI.Controllers;
 
@@ -6,6 +9,7 @@ namespace ProductJudgeAPI.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
+    private readonly AppDbContext appDbContext;
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -13,9 +17,10 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, AppDbContext appDbContext)
     {
         _logger = logger;
+        this.appDbContext = appDbContext;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -28,5 +33,20 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
+    }
+    
+    [HttpPost(Name = "PostWeatherForecast")]
+    public async Task<ActionResult> Post(CancellationToken cancellationToken = default)
+    {
+        var user = new Entities.User()
+        {
+            Email = "test",
+            Name = "test",
+            Password = "test",
+        };
+        appDbContext.Users.Add(user);
+
+        await appDbContext.SaveChangesAsync(cancellationToken);
+        return Ok();
     }
 }

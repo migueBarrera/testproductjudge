@@ -1,5 +1,7 @@
-﻿namespace ProductJudgeAPI.Features.User.Register;
+﻿using ProductJudge.Api.Models.Auth;
 
-public class RegisterResponse
+namespace ProductJudgeAPI.Features.User.Register;
+
+public class RegisterResponse : RegisterResponseDto
 {
 }

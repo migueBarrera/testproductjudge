@@ -1,10 +1,7 @@
-﻿namespace ProductJudgeAPI.Features.Product.CreateProduct;
+﻿using ProductJudge.Api.Models.Products;
 
-public class CreateProductResponse
+namespace ProductJudgeAPI.Features.Product.CreateProduct;
+
+public class CreateProductResponse : CreateProductResponseDto
 {
-    public int Id { get; set; }
-
-    public string Name { get; set; } = string.Empty;
-
-    public string Description { get; set; } = string.Empty;
 }

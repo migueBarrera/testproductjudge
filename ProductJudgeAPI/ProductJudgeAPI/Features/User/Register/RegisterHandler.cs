@@ -1,15 +1,18 @@
 ﻿using MediatR;
 using ProductJudgeAPI.Context;
+using ProductJudgeAPI.Extensions;
 
 namespace ProductJudgeAPI.Features.User.Register;
 
 public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse>
 {
     private readonly AppDbContext applicationDbContext;
+    private readonly JwtSecurityTokenService jwtSecurityTokenService;
 
-    public RegisterHandler(AppDbContext applicationDbContext)
+    public RegisterHandler(AppDbContext applicationDbContext, JwtSecurityTokenService jwtSecurityTokenService)
     {
         this.applicationDbContext = applicationDbContext;
+        this.jwtSecurityTokenService = jwtSecurityTokenService;
     }
 
     public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
@@ -27,7 +30,9 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
 
         return new RegisterResponse()
         {
-
+            Email = user.Email,
+            Token = jwtSecurityTokenService.BuildToken(),
+            RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
         };
     }
 }

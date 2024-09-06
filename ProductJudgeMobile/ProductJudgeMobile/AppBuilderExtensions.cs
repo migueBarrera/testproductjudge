@@ -1,7 +1,10 @@
-﻿using ProductJudge.Mobile.DAL.Refit;
+﻿using Microsoft.Extensions.Logging;
+using ProductJudge.Mobile.DAL.Refit;
 using ProductJudgeMobile.Features.ListProducts;
 using ProductJudgeMobile.Features.Login;
 using ProductJudgeMobile.Features.MainPage;
+using ProductJudgeMobile.Features.Register;
+using ProductJudgeMobile.Features.ScannerCheckProduct;
 using SecretAligner.Telemedicine.Mobile.Infrastructure;
 
 namespace ProductJudgeMobile;
@@ -12,10 +15,20 @@ internal static class AppBuilderExtensions
     {
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<RegisterViewModel>();
+        builder.Services.AddTransient<RegisterPage>();
         builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<ListProductsViewModel>();
         builder.Services.AddTransient<ListProductsPage>();
+        builder.Services.AddTransient<ScannerCheckProductPage>();
+        builder.Services.AddTransient<ScannerCheckProductViewModel>();
+
+
+
+
+        builder.Services.AddTransient<LoginService>();
+        builder.Services.AddTransient<RegisterService>();
 
         return builder;
     }
@@ -29,7 +42,11 @@ internal static class AppBuilderExtensions
                 httpClient.Timeout = TimeSpan.FromSeconds(10);
             })
 #if DEBUG
-            .ConfigurePrimaryHttpMessageHandler((c) => new HttpLoggingHandler());
+        .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
+        {
+            var logger = serviceProvider.GetRequiredService<ILogger<HttpLoggingHandler>>();
+            return new HttpLoggingHandler(logger);
+        });
 #else
     ;
 #endif

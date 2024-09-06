@@ -11,4 +11,8 @@
     <PackageReference Include="Refit" Version="7.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProductJudge.Api.Models\ProductJudge.Api.Models.csproj" />
+  </ItemGroup>
+
 </Project>

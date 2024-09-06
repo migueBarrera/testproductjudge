@@ -1,5 +1,7 @@
-﻿namespace ProductJudgeAPI.Features.User.Login;
+﻿using ProductJudge.Api.Models.Auth;
 
-public class LoginResponse
+namespace ProductJudgeAPI.Features.User.Login;
+
+public class LoginResponse : LoginResponseDto
 {
 }

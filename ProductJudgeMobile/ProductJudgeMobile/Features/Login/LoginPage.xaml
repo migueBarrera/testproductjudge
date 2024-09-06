@@ -112,5 +112,10 @@
             Command="{Binding EnterCommand}"
             Style="{StaticResource ButtonStyle}" />
 
+        <Button
+            Text="Registrarse"
+            Command="{Binding RegisterCommand}"
+            Style="{StaticResource ButtonStyle}" />
+
     </VerticalStackLayout>
 </ContentPage>

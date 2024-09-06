@@ -10,6 +10,7 @@ namespace ProductJudgeAPI.Controllers;
 
 [Route($"{ApiConstants.Endpoints.ApiBase}/{ApiConstants.Endpoints.User}")]
 [ControllerName(ApiConstants.Controllers.User)]
+[ApiController]
 public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;

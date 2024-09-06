@@ -1,13 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProductJudgeMobile.Features.ListProducts
+namespace ProductJudgeMobile.Features.ListProducts;
+
+public class ListProductsViewModel : ObservableObject
 {
-    public class ListProductsViewModel : ObservableObject
-    {
-    }
 }

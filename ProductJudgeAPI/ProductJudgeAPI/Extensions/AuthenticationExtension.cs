@@ -8,10 +8,11 @@ public static class AuthenticationExtension
 {
     public static IServiceCollection AddTokenAuthentication(this IServiceCollection services, IConfiguration config)
     {
+        services.AddTransient<JwtSecurityTokenService>();
+
         var secret = config.GetSection("Jwt").GetSection("Key").Value;
 
         ArgumentNullException.ThrowIfNull(secret);
-
 
         services.AddAuthentication(x =>
         {
