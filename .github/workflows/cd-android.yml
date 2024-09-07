@@ -60,7 +60,7 @@ jobs:
         encodedString: ${{ secrets.keystore }}
 
     - name: Version the app
-      uses: managedcode/MAUIAppVersion@v.1.1.0
+      uses: managedcode/MAUIAppVersion@v1.1.0
       with: 
         csproj: ${{ inputs.project-file }}
         version: ${{ github.run_number }} # to keep value unique
