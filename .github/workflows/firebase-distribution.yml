@@ -1,0 +1,50 @@
+# Workflow: Firebase Distribution 🚀
+# This workflow uploads an APK to Firebase App Distribution.
+# It expects the APK to be available as an artifact from a previous job.
+
+name: Firebase Distribution 🚀
+
+on:
+  workflow_call:
+    secrets:
+      firebase_app_id:
+        description: 'Firebase App ID for the target application'
+        required: true
+      firebase_service_account:
+        description: 'Service account JSON for Firebase authentication'
+        required: true
+
+jobs:
+  upload:
+    name: ⬆️ Upload APK to Firebase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: apk
+          path: temporalDirectory
+
+      - name: 🔍 Get generated APK
+        run: |
+          cd temporalDirectory
+          $apkPath = Get-ChildItem -Recurse -Filter *.apk | Where-Object { $_.Name -like "*release*" } | Select-Object -First 1 -ExpandProperty FullName
+          echo "APK_PATH=$apkPath" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      - name: 🗄️ Generate firebase json file
+        shell: bash
+        run: 'echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > firebase.json'
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.firebase_service_account }}
+
+      - name: ⚙️ Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: ⬆️ Upload APK to Firebase App Distribution
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ./firebase.json
+        run: |
+          firebase appdistribution:distribute --debug ${{ env.APK_PATH }} \
+            --app "${{ secrets.firebase_app_id }}"

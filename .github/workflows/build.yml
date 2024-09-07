@@ -45,3 +45,10 @@ jobs:
       keystore: ${{ secrets.ANDROID_KEYSTORE }}
       keystore-alias: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
       keystore-password: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+
+  distribute-firebase:
+   needs: build-android
+   uses: ./.github/workflows/firebase-distribution.yml
+   secrets:
+      firebase_app_id: ${{ secrets.firebase_app_id}}
+      firebase_service_account: ${{ secrets.firebase_service_account }}
