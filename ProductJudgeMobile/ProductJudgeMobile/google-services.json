@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1001954495188",
+    "firebase_url": "https://productjudge-de74a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "productjudge-de74a",
+    "storage_bucket": "productjudge-de74a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001954495188:android:47f4fbd6f21154bb778941",
+        "android_client_info": {
+          "package_name": "com.mbmdevelop.productjudge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001954495188-5t16l60h90853asa824c09ir2dsr22gl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mbmdevelop.productjudge",
+            "certificate_hash": "89b8387fd0781c2a66538a9dc1ae6745932f1a8a"
+          }
+        },
+        {
+          "client_id": "1001954495188-6bsctj2ear9c3md5gndghta51lkjuonr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mbmdevelop.productjudge",
+            "certificate_hash": "32e21a39cde067e9764b1c288530bd1ba460925b"
+          }
+        },
+        {
+          "client_id": "1001954495188-qq3a8la2icgj9jb5qecbal9k4nhc0m0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrS60j3tkB0Cj4-46tA_9WlWolwkecSg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001954495188-gchtpksuq5reilhg5vljmjn4gj4ojou9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
