@@ -24,7 +24,7 @@
 		<ApplicationTitle>ProductJudgeMobile</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.productjudgemobile</ApplicationId>
+		<ApplicationId>com.mbmdevelop.productjudge</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
