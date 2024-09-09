@@ -11,16 +11,16 @@
     xmlns:scanner="clr-namespace:ProductJudgeMobile.Features.ScannerCheckProduct"
     xmlns:listProducts="clr-namespace:ProductJudgeMobile.Features.ListProducts"
     xmlns:productDetail="clr-namespace:ProductJudgeMobile.Features.ProductDetail"
+    xmlns:newProduct="clr-namespace:ProductJudgeMobile.Features.NewProduct"
     Title="ProductJudgeMobile">
 
     <ShellContent
-        Title="ScannerCheckProductPage"
-        ContentTemplate="{DataTemplate scanner:ScannerCheckProductPage}" />
+        Title="NewProduct"
+        ContentTemplate="{DataTemplate newProduct:NewProductPage}" />
     
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate login:LoginPage}" />
-    
     
     <ShellContent
         Title="Register"
@@ -38,4 +38,11 @@
         Title="ProductDetail"
         ContentTemplate="{DataTemplate productDetail:ProductDetailPage}" />
 
+    <!--<ShellContent
+        Title="NewProduct"
+        ContentTemplate="{DataTemplate newProduct:NewProductPage}" />-->
+
+    <ShellContent
+        Title="ScannerCheckProductPage"
+        ContentTemplate="{DataTemplate scanner:ScannerCheckProductPage}" />
 </Shell>

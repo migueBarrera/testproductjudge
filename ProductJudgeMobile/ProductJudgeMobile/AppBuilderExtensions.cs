@@ -3,6 +3,7 @@ using ProductJudge.Mobile.DAL.Refit;
 using ProductJudgeMobile.Features.ListProducts;
 using ProductJudgeMobile.Features.Login;
 using ProductJudgeMobile.Features.MainPage;
+using ProductJudgeMobile.Features.NewProduct;
 using ProductJudgeMobile.Features.ProductDetail;
 using ProductJudgeMobile.Features.Register;
 using ProductJudgeMobile.Features.ScannerCheckProduct;
@@ -26,6 +27,8 @@ internal static class AppBuilderExtensions
         builder.Services.AddTransient<ScannerCheckProductViewModel>();
         builder.Services.AddTransient<ProductDetailPage>();
         builder.Services.AddTransient<ProductDetailViewModel>();
+        builder.Services.AddTransient<NewProductPage>();
+        builder.Services.AddTransient<NewProductViewModel>();
 
         builder.Services.AddTransient<LoginService>();
         builder.Services.AddTransient<RegisterService>();

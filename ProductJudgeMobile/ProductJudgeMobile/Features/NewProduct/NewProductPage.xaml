@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProductJudgeMobile.Features.NewProduct.NewProductPage"
+             xmlns:local="clr-namespace:ProductJudgeMobile.Features.NewProduct"
+             x:DataType="local:NewProductViewModel"
+             Title="NewProductPage">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="10"
+            Spacing="15">
+
+            <!-- Campo para ingresar el nombre del producto -->
+            <Label
+                Text="Nombre del Producto"
+                FontSize="16"
+                FontAttributes="Bold" />
+            <Entry
+                Placeholder="Ingresa el nombre"
+                Text="{Binding ProductName}" />
+
+            <!-- Campo para ingresar la descripción del producto -->
+            <Label
+                Text="Descripción del Producto"
+                FontSize="16"
+                FontAttributes="Bold" />
+            <Editor
+                Placeholder="Ingresa la descripción"
+                Text="{Binding ProductDescription}"
+                HeightRequest="100" />
+
+            <!-- Campo para ingresar la URL de la imagen -->
+            <Label
+                Text="URL de la Imagen"
+                FontSize="16"
+                FontAttributes="Bold" />
+            <Entry
+                Placeholder="Ingresa la URL de la imagen"
+                Text="{Binding ProductImage}" />
+
+            <!-- Campo para ingresar el precio del producto -->
+            <Label
+                Text="Precio del Producto"
+                FontSize="16"
+                FontAttributes="Bold" />
+            <Entry
+                Placeholder="Ingresa el precio"
+                Keyboard="Numeric"
+                Text="{Binding ProductPrice}" />
+
+            <!-- Botón para crear el producto -->
+            <Button
+                Text="Crear Producto"
+                Command="{Binding CreateProductCommand}"
+                BackgroundColor="LightGreen"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                Padding="10,5" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
