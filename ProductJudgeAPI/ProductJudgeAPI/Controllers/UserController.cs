@@ -1,8 +1,6 @@
 ﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProductJudgeAPI;
 using ProductJudgeAPI.Features.User.Login;
 using ProductJudgeAPI.Features.User.Register;
 

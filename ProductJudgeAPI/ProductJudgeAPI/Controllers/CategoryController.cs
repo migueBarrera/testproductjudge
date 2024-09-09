@@ -1,7 +1,6 @@
 ﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ProductJudgeAPI.Features.Category.CreateCategory;
 using ProductJudgeAPI.Features.Category.GetCategories;
 

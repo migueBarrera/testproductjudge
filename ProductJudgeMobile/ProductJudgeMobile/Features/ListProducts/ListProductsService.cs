@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using ProductJudge.Api.Models.Products;
 using ProductJudge.Mobile.DAL.API;
+using SecretAligner.Telemedicine.Mobile.Infrastructure;
+using System.Net.Http.Headers;
 
 namespace ProductJudgeMobile.Features.ListProducts;
 
@@ -9,10 +11,13 @@ public class ListProductsService
     private readonly IProductsApi productApi;
     private readonly ILogger<ListProductsService> logger;
 
-    public ListProductsService(IProductsApi productApi, ILogger<ListProductsService> logger)
+    public ListProductsService(ILogger<ListProductsService> logger, IHttpClientFactory httpClientFactory)
     {
-        this.productApi = productApi;
         this.logger = logger;
+
+        var httpClient = httpClientFactory.CreateClient(HttpClients.FAKE_API);
+        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        productApi = Refit.RestService.For<IProductsApi>(httpClient);
     }
 
     internal async Task<GetAllProductResponseDto> GetProducts()

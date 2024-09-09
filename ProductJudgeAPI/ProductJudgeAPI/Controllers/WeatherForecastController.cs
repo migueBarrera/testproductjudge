@@ -1,7 +1,5 @@
-using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using ProductJudgeAPI.Context;
-using System.Threading;
 
 namespace ProductJudgeAPI.Controllers;
 

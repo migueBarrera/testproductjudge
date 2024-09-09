@@ -10,6 +10,7 @@
     xmlns:register="clr-namespace:ProductJudgeMobile.Features.Register"
     xmlns:scanner="clr-namespace:ProductJudgeMobile.Features.ScannerCheckProduct"
     xmlns:listProducts="clr-namespace:ProductJudgeMobile.Features.ListProducts"
+    xmlns:productDetail="clr-namespace:ProductJudgeMobile.Features.ProductDetail"
     Title="ProductJudgeMobile">
 
     <ShellContent
@@ -32,5 +33,9 @@
     <ShellContent
         Title="ListProducts"
         ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />
+
+    <ShellContent
+        Title="ProductDetail"
+        ContentTemplate="{DataTemplate productDetail:ProductDetailPage}" />
 
 </Shell>

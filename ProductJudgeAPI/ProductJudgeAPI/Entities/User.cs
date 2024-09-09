@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace ProductJudgeAPI.Entities;
+﻿namespace ProductJudgeAPI.Entities;
 
 public class User
 {

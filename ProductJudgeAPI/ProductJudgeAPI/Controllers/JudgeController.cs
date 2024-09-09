@@ -1,9 +1,6 @@
 ﻿using Asp.Versioning;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProductJudgeAPI;
 using ProductJudgeAPI.Features.Judge.CreateJudge;
 
 namespace ProductJudgeAPI.Controllers;

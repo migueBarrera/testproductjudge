@@ -1,10 +1,7 @@
 ﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProductJudge.Api.Models.Products;
 using ProductJudgeAPI.Features.Product.CreateProduct;
-using ProductJudgeAPI.Features.Product.GetAllProducts;
 using ProductJudgeAPI.Features.Product.GetProductByCategoryId;
 
 namespace ProductJudgeAPI.Controllers;

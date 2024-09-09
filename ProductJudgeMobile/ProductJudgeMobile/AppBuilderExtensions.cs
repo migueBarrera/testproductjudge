@@ -3,6 +3,7 @@ using ProductJudge.Mobile.DAL.Refit;
 using ProductJudgeMobile.Features.ListProducts;
 using ProductJudgeMobile.Features.Login;
 using ProductJudgeMobile.Features.MainPage;
+using ProductJudgeMobile.Features.ProductDetail;
 using ProductJudgeMobile.Features.Register;
 using ProductJudgeMobile.Features.ScannerCheckProduct;
 using SecretAligner.Telemedicine.Mobile.Infrastructure;
@@ -23,12 +24,14 @@ internal static class AppBuilderExtensions
         builder.Services.AddTransient<ListProductsPage>();
         builder.Services.AddTransient<ScannerCheckProductPage>();
         builder.Services.AddTransient<ScannerCheckProductViewModel>();
-
-
-
+        builder.Services.AddTransient<ProductDetailPage>();
+        builder.Services.AddTransient<ProductDetailViewModel>();
 
         builder.Services.AddTransient<LoginService>();
         builder.Services.AddTransient<RegisterService>();
+        builder.Services.AddTransient<ListProductsService>();
+        builder.Services.AddTransient<ProductDetailService>();
+        builder.Services.AddTransient<BarcodeService>();
 
         return builder;
     }

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ProductJudge.Api.Models.Products;
 
-namespace ProductJudge.Api.Models.Products
+public class GetAllProductsRequestDto
 {
-    public class GetAllProductsRequestDto
-    {
-    }
 }
