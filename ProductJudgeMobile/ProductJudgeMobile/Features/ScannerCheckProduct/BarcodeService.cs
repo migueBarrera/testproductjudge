@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using ProductJudge.Api.Models.Auth;
 using ProductJudge.Api.Models.Barcode;
 using ProductJudge.Mobile.DAL.API;
 using ProductJudge.Mobile.DAL.Refit;

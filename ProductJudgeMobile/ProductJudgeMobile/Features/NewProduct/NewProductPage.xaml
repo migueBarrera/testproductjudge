@@ -30,23 +30,48 @@
                 HeightRequest="100" />
 
             <!-- Campo para ingresar la URL de la imagen -->
-            <Label
-                Text="URL de la Imagen"
-                FontSize="16"
-                FontAttributes="Bold" />
-            <Entry
-                Placeholder="Ingresa la URL de la imagen"
-                Text="{Binding ProductImage}" />
+         
+           
+            <VerticalStackLayout>
+                <Grid ColumnDefinitions="auto, *">
+                    <Label
+                        Text="Imagenes"
+                        FontSize="16"
+                        VerticalOptions="Center"
+                        FontAttributes="Bold" />
 
-            <!-- Campo para ingresar el precio del producto -->
-            <Label
-                Text="Precio del Producto"
-                FontSize="16"
-                FontAttributes="Bold" />
-            <Entry
-                Placeholder="Ingresa el precio"
-                Keyboard="Numeric"
-                Text="{Binding ProductPrice}" />
+                    <Button
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Command="{Binding CaptureImageCommand}"
+                        Text="Add Image" 
+                        VerticalOptions="Center"/>
+                </Grid>
+                
+
+                <CollectionView
+                    ItemsLayout="HorizontalList"
+                    ItemsSource="{Binding Images}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                StrokeThickness="0"
+                                Margin="0,0,8,0"
+                                StrokeShape="RoundRectangle 8"
+                                Background="#2B0B98"
+                                Padding="0"
+                                HeightRequest="200"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+                                <Image
+                                    Source="{Binding .}"
+                                    Aspect="AspectFit" />
+                            </Border>
+                       
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
 
             <!-- Botón para crear el producto -->
             <Button

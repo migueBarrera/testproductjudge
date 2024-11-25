@@ -20,7 +20,7 @@ public class ListProductsService
         productApi = Refit.RestService.For<IProductsApi>(httpClient);
     }
 
-    internal async Task<GetAllProductResponseDto> GetProducts()
+    internal async Task<IEnumerable<GetAllProductResponseDto>> GetProducts()
     {
         try
         {
@@ -31,7 +31,7 @@ public class ListProductsService
         catch (Exception e)
         {
             logger.LogError(e, e.Message);
-            return new GetAllProductResponseDto();
+            return Enumerable.Empty<GetAllProductResponseDto>();
         }
     }
 }

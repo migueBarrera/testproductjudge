@@ -1,59 +1,59 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ProductJudgeMobile.Features.ProductDetail;
 using System.Collections.ObjectModel;
 
 namespace ProductJudgeMobile.Features.NewProduct;
 
 public partial class NewProductViewModel : ObservableObject
 {
-    // Propiedades del producto
-    [ObservableProperty]
-    private string productName;
+    private readonly CreateProductService createProductService;
 
     [ObservableProperty]
-    private string productDescription;
+    private string productName = string.Empty;
 
     [ObservableProperty]
-    private string productImage;
+    private string productDescription = string.Empty;
 
     [ObservableProperty]
-    private decimal productPrice;
+    private ObservableCollection<ImageSource> images = [];
 
-    public NewProductViewModel()
+    public NewProductViewModel(CreateProductService createProductService)
     {
-        // Constructor vacío o lógica de inicialización si es necesario
+        this.createProductService = createProductService;
     }
 
-    // Comando para crear el producto
+    [RelayCommand]
+    private async Task CaptureImage()
+    {
+        if (MediaPicker.Default.IsCaptureSupported)
+        {
+            FileResult? photo = await MediaPicker.Default.CapturePhotoAsync();
+
+            if (photo != null)
+            {
+                using Stream sourceStream = await photo.OpenReadAsync();
+                using var memoryStream = new MemoryStream();
+                await sourceStream.CopyToAsync(memoryStream);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                var imageStream = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
+                Images.Add(imageStream);
+            }
+        }
+    }
+
     [RelayCommand]
     private async Task CreateProduct()
     {
-        // Validación de los campos
         if (string.IsNullOrWhiteSpace(ProductName) ||
-            string.IsNullOrWhiteSpace(ProductDescription) ||
-            string.IsNullOrWhiteSpace(ProductImage) ||
-            ProductPrice <= 0)
+            string.IsNullOrWhiteSpace(ProductDescription))
         {
-            // Mostrar algún mensaje de error al usuario (si hay algún servicio de mensajes implementado)
-            await Application.Current.MainPage.DisplayAlert("Error", "Todos los campos son obligatorios y el precio debe ser mayor a cero.", "OK");
+            await Application.Current.MainPage.DisplayAlert("Error", "Todos los campos son obligatorios ", "OK");
             return;
         }
 
-        // Lógica para crear el nuevo producto (puedes enviar los datos a una API, almacenarlos localmente, etc.)
-        // Aquí simulo el envío del producto a una API o servicio
-        await Task.Delay(1000); // Simulación de un tiempo de espera para la creación del producto
+        var apiResponse = await createProductService.CreateProduct(ProductName, ProductDescription);
 
-        // Mostrar mensaje de éxito
         await Application.Current.MainPage.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
-
-        // Limpiar los campos después de crear el producto
-        ProductName = string.Empty;
-        ProductDescription = string.Empty;
-        ProductImage = string.Empty;
-        ProductPrice = 0;
     }
-
-
-
 }

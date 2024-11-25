@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ProductJudgeMobile.Features.NewProduct;
 
-namespace ProductJudgeMobile.Features.NewProduct
+public class NewProductService
 {
-    public class NewProductService
-    {
-    }
 }

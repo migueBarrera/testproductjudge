@@ -4,23 +4,23 @@ using ProductJudgeAPI.Context;
 
 namespace ProductJudgeAPI.Features.Product.GetProductByCategoryId;
 
-public class GetProductByCategoryIdHandler : IRequestHandler<GetProductByCategoryIdRequest, IEnumerable<GetProductByCategoryIdResponse>>
+public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, IEnumerable<GetProductByIdResponse>>
 {
     private readonly AppDbContext applicationDbContext;
 
-    public GetProductByCategoryIdHandler(AppDbContext applicationDbContext)
+    public GetProductByIdHandler(AppDbContext applicationDbContext)
     {
         this.applicationDbContext = applicationDbContext;
     }
 
-    public async Task<IEnumerable<GetProductByCategoryIdResponse>> Handle(GetProductByCategoryIdRequest request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<GetProductByIdResponse>> Handle(GetProductByIdRequest request, CancellationToken cancellationToken)
     {
         var items = await applicationDbContext
             .Products
             .Where(x => x.CategoryId == request.CategoryId)
             .ToListAsync(cancellationToken);
 
-        return items.Select(x => new GetProductByCategoryIdResponse()
+        return items.Select(x => new GetProductByIdResponse()
         {
             Id = x.Id,
             Name = x.Name,

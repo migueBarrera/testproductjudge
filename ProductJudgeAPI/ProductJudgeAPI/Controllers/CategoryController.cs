@@ -7,6 +7,7 @@ using ProductJudgeAPI.Features.Category.GetCategories;
 namespace ProductJudgeAPI.Controllers;
 
 [Route($"{ApiConstants.Endpoints.ApiBase}/{ApiConstants.Endpoints.Category}")]
+[ApiController]
 [ControllerName(ApiConstants.Controllers.Category)]
 public class CategoryController : ControllerBase
 {
@@ -19,10 +20,10 @@ public class CategoryController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet(Name = "GetCategory")]
-    public async Task<ActionResult<IEnumerable<GetCategoryResponse>>> GetByCategory(GetCategoryRequest request, CancellationToken cancellationToken = default)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<GetCategoryResponse>>> GetByCategory(CancellationToken cancellationToken = default)
     {
-        var response = await _mediator.Send(request, cancellationToken);
+        var response = await _mediator.Send(new GetCategoryRequest(), cancellationToken);
         return Ok(response);
     }
 

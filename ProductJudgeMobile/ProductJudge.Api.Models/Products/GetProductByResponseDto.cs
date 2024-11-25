@@ -1,6 +1,7 @@
-﻿namespace ProductJudgeAPI.Features.Product.GetProductByCategoryId;
+﻿namespace ProductJudge.Api.Models.Products;
 
-public class GetProductByCategoryIdResponse
+public class GetProductByResponseDto
+
 {
     public int Id { get; set; }
 

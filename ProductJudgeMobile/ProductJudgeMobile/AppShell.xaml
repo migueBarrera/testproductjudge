@@ -15,8 +15,8 @@
     Title="ProductJudgeMobile">
 
     <ShellContent
-        Title="NewProduct"
-        ContentTemplate="{DataTemplate newProduct:NewProductPage}" />
+        Title="ListProductsPage"
+        ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />
     
     <ShellContent
         Title="Login"
@@ -30,9 +30,9 @@
         Title="Main"
         ContentTemplate="{DataTemplate main:MainPage}"/>
 
-    <ShellContent
+    <!--<ShellContent
         Title="ListProducts"
-        ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />
+        ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />-->
 
     <ShellContent
         Title="ProductDetail"

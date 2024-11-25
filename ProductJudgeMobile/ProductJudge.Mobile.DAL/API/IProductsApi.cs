@@ -5,12 +5,12 @@ namespace ProductJudge.Mobile.DAL.API;
 
 public interface IProductsApi
 {
-    [Get("/DoctorProfile")]
+    [Put("/api/product")]
     Task<CreateProductResponseDto> CreateProduct(CreateProductRequestDto request);
 
-    [Post("/DoctorProfile")]
-    Task<CreateProductResponseDto> GetProductDetail(CreateProductRequestDto request);
+    [Get("/api/product/{id}")]
+    Task<GetProductByResponseDto> GetProductDetail([AliasAs("id")] int productId);
     
-    [Post("/products")]
-    Task<GetAllProductResponseDto> GetAll(GetAllProductsRequestDto request);
+    [Get("/api/product")]
+    Task<IEnumerable<GetAllProductResponseDto>> GetAll(GetAllProductsRequestDto request);
 }

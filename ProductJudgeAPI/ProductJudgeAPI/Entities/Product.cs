@@ -8,9 +8,11 @@ public class Product
 
     public string Description { get; set; } = string.Empty;
 
-    public ICollection<Judge> Judges { get; set; } = [];
+    public string Image { get; set; } = string.Empty;
 
-    public IEnumerable<Barcode> Barcodes{ get; set; } = [];
+    public ICollection<Judge> Judges { get; set; } = new List<Judge>();
+
+    public IEnumerable<Barcode> Barcodes { get; set; } = new List<Barcode>();
 
     public int CategoryId { get; set; }
     public Category? Category { get; set; }

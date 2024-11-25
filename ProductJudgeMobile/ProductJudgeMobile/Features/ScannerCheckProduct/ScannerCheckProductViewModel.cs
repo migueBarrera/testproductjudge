@@ -3,56 +3,55 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using ZXing.Net.Maui;
 
-namespace ProductJudgeMobile.Features.ScannerCheckProduct
-{
-    public partial class ScannerCheckProductViewModel : ObservableObject
-    {
-        private ILogger<ScannerCheckProductViewModel> _logger;
-        private string _lastBarcode = string.Empty;
-        private readonly BarcodeService barcodeService;
+namespace ProductJudgeMobile.Features.ScannerCheckProduct;
 
-        public ScannerCheckProductViewModel(ILogger<ScannerCheckProductViewModel> logger, BarcodeService barcodeService)
+public partial class ScannerCheckProductViewModel : ObservableObject
+{
+    private ILogger<ScannerCheckProductViewModel> _logger;
+    private string _lastBarcode = string.Empty;
+    private readonly BarcodeService barcodeService;
+
+    public ScannerCheckProductViewModel(ILogger<ScannerCheckProductViewModel> logger, BarcodeService barcodeService)
+    {
+        _logger = logger;
+        this.barcodeService = barcodeService;
+    }
+
+    [RelayCommand]
+    private async Task ScannerBarcode(BarcodeDetectionEventArgs barcodeDetectionEventArgs)
+    {
+        if (!barcodeDetectionEventArgs.Results.Any())
         {
-            _logger = logger;
-            this.barcodeService = barcodeService;
+            return;
         }
 
-        [RelayCommand]
-        private async Task ScannerBarcode(BarcodeDetectionEventArgs barcodeDetectionEventArgs)
+        var barcode = barcodeDetectionEventArgs.Results.First().Value;
+
+        if (barcode == _lastBarcode)
         {
-            if (!barcodeDetectionEventArgs.Results.Any())
+            _logger.LogWarning("Duplicate barcode detected");
+            return;
+        }
+
+        _lastBarcode = barcode;
+
+        var apiResponse = await barcodeService.CheckProductByBarcode(barcode);
+        if (apiResponse.IsError)
+        {
+            await Shell.Current.DisplayAlert("Api error", apiResponse.ErrorMessage, "Ok");
+        }
+        else
+        {
+            if (apiResponse.Value!.ExistProduct)
             {
-                return;
-            }
-
-            var barcode = barcodeDetectionEventArgs.Results.First().Value;
-
-            if (barcode == _lastBarcode)
-            {
-                _logger.LogWarning("Duplicate barcode detected");
-                return;
-            }
-
-            _lastBarcode = barcode;
-
-            var apiResponse = await barcodeService.CheckProductByBarcode(barcode);
-            if (apiResponse.IsError)
-            {
-                await Shell.Current.DisplayAlert("Api error", apiResponse.ErrorMessage, "Ok");
+                await Shell.Current.DisplayAlert("Product found", $"Product found id: {apiResponse.Value!.ProductId}", "OK");
             }
             else
             {
-                if (apiResponse.Value!.ExistProduct)
-                {
-                    await Shell.Current.DisplayAlert("Product found", $"Product found id: {apiResponse.Value!.ProductId}", "OK");
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert("Product not found", "Product not found", "OK");
-                }
+                await Shell.Current.DisplayAlert("Product not found", "Product not found", "OK");
             }
-            
-
         }
+        
+
     }
 }

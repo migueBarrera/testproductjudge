@@ -2,7 +2,7 @@
 
 namespace ProductJudgeAPI.Features.Product.GetProductByCategoryId;
 
-public class GetProductByCategoryIdRequest : IRequest<IEnumerable<GetProductByCategoryIdResponse>>
+public class GetProductByIdRequest : IRequest<IEnumerable<GetProductByIdResponse>>
 {
     public int CategoryId { get; set; }
 }
