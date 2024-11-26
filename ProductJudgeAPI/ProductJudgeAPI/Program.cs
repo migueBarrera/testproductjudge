@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using ProductJudgeAPI.Context;
+using ProductJudgeAPI.Entities;
 using ProductJudgeAPI.Extensions;
 using Scalar.AspNetCore;
 using System.Reflection;
@@ -13,6 +14,9 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Services.Configure<BookStoreDatabaseSettings>(
+            builder.Configuration.GetSection("BookStoreDatabase"));
+        builder.Services.AddSingleton<BooksService>();
         // Add services to the container.
 
         builder.Services.AddControllers();
