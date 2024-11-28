@@ -1,13 +1,12 @@
 ﻿using MediatR;
-using ProductJudgeAPI.Context;
 
 namespace ProductJudgeAPI.Features.Judge.CreateJudge;
 
 public class CreateJudgeHandler : IRequestHandler<CreateJudgeRequest, CreateJudgeResponse>
 {
-    private readonly AppDbContext applicationDbContext;
+    private readonly JudgeService applicationDbContext;
 
-    public CreateJudgeHandler(AppDbContext applicationDbContext)
+    public CreateJudgeHandler(JudgeService applicationDbContext)
     {
         this.applicationDbContext = applicationDbContext;
     }
@@ -21,9 +20,7 @@ public class CreateJudgeHandler : IRequestHandler<CreateJudgeRequest, CreateJudg
             UserId = request.UserId,
         };
 
-        applicationDbContext.Judges.Add(judge);
-
-        await applicationDbContext.SaveChangesAsync(cancellationToken);
+        await applicationDbContext.CreateAsync(judge);
 
         return new CreateJudgeResponse()
         {

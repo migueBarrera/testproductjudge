@@ -1,8 +1,8 @@
-
-using Microsoft.EntityFrameworkCore;
-using ProductJudgeAPI.Context;
 using ProductJudgeAPI.Entities;
 using ProductJudgeAPI.Extensions;
+using ProductJudgeAPI.Features.Barcode;
+using ProductJudgeAPI.Features.Category;
+using ProductJudgeAPI.Features.Judge;
 using ProductJudgeAPI.Features.Product;
 using ProductJudgeAPI.Features.User;
 using Scalar.AspNetCore;
@@ -18,9 +18,11 @@ public class Program
 
         builder.Services.Configure<StoreDatabaseSettings>(
             builder.Configuration.GetSection("BookStoreDatabase"));
-        builder.Services.AddSingleton<BooksService>();
+        builder.Services.AddSingleton<BarcodeService>();
         builder.Services.AddTransient<UserService>();
         builder.Services.AddTransient<ProductService>();
+        builder.Services.AddTransient<CategoryService>();
+        builder.Services.AddTransient<JudgeService>();
         // Add services to the container.
 
         builder.Services.AddControllers();

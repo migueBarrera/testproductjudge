@@ -2,14 +2,13 @@
 using ProductJudgeAPI.Entities;
 using ProductJudgeAPI.Helpers;
 
-namespace ProductJudgeAPI.Features.User
+namespace ProductJudgeAPI.Features.User;
+
+public class UserService : MongoServiceBase<Entities.User>
 {
-    public class UserService : MongoServiceBase<Entities.User>
+    public UserService(IOptions<StoreDatabaseSettings> bookStoreDatabaseSettings)
+        : base(bookStoreDatabaseSettings)
     {
-        public UserService(IOptions<StoreDatabaseSettings> bookStoreDatabaseSettings)
-            : base(bookStoreDatabaseSettings)
-        {
-            _collectionName = bookStoreDatabaseSettings.Value.BooksCollectionName;
-        }
+        _collectionName = bookStoreDatabaseSettings.Value.BooksCollectionName;
     }
 }

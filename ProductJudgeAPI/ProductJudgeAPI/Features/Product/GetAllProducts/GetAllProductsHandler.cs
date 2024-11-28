@@ -1,21 +1,19 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using ProductJudgeAPI.Context;
 
 namespace ProductJudgeAPI.Features.Product.GetAllProducts;
 
 public class GetAllProductsHandler : IRequestHandler<GetAllProductsRequest, IEnumerable<GetAllProductsResponse>>
 {
-    private readonly AppDbContext applicationDbContext;
+    private readonly ProductService applicationDbContext;
 
-    public GetAllProductsHandler(AppDbContext applicationDbContext)
+    public GetAllProductsHandler(ProductService applicationDbContext)
     {
         this.applicationDbContext = applicationDbContext;
     }
 
     public async Task<IEnumerable<GetAllProductsResponse>> Handle(GetAllProductsRequest request, CancellationToken cancellationToken)
     {
-        var items = await applicationDbContext.Products.ToListAsync(cancellationToken);
+        var items = await applicationDbContext.GetAsync();
 
         return items.Select(x => new GetAllProductsResponse()
         {

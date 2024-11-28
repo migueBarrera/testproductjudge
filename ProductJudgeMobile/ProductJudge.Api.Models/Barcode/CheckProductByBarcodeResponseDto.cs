@@ -4,5 +4,5 @@ public class CheckProductByBarcodeResponseDto
 {
     public bool ExistProduct { get; set; }
 
-    public int ProductId { get; set; }
+    public string ProductId { get; set; } = string.Empty;
 }

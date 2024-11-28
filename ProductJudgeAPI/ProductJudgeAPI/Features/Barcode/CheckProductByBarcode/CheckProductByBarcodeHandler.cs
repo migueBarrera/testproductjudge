@@ -1,25 +1,27 @@
 ﻿using MediatR;
 using MongoDB.Driver;
-using ProductJudgeAPI.Entities;
+using ProductJudgeAPI.Features.Product;
 
 namespace ProductJudgeAPI.Features.Barcode.CheckProductByBarcode;
 
 public class CheckProductByBarcodeHandler : IRequestHandler<CheckProductByBarcodeRequest, CheckProductByBarcodeResponse>
 {
-    private readonly BooksService applicationDbContext;
+    private readonly BarcodeService barcodeService;
+    private readonly ProductService productService;
 
-    public CheckProductByBarcodeHandler(BooksService applicationDbContext)
+    public CheckProductByBarcodeHandler(ProductService productService, BarcodeService barcodeService)
     {
-        this.applicationDbContext = applicationDbContext;
+        this.productService = productService;
+        this.barcodeService = barcodeService;
     }
 
     public async Task<CheckProductByBarcodeResponse> Handle(CheckProductByBarcodeRequest request, CancellationToken cancellationToken)
     {
-        var filter = Builders<Book>.Filter.Eq(b => b.Author, "Gabriel García Márquez");
-        var existBarcode = await applicationDbContext
+        var filter = Builders<Entities.Barcode>.Filter.Eq(b => b.Value, request.Barcode);
+        var existBarcode = await barcodeService
             .GetAsync(filter);
 
-        if (existBarcode is null)
+        if (existBarcode is null || existBarcode.Count == 0)
         {
             return new CheckProductByBarcodeResponse()
             {
@@ -27,9 +29,9 @@ public class CheckProductByBarcodeHandler : IRequestHandler<CheckProductByBarcod
             };
         }
 
-        var product = await applicationDbContext
-            .Products
-            .FirstOrDefaultAsync(x => x.Id == existBarcode.ProductId, cancellationToken);
+        var filterPRoduct = Builders<Entities.Product>.Filter.Eq(b => b.Id, request.Barcode);
+        var product = await productService
+            .GetAsync(existBarcode.First().ProductId);
 
         if (product is null)
         {

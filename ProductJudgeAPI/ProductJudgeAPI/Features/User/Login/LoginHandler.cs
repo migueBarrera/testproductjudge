@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
-using ProductJudgeAPI.Context;
 using ProductJudgeAPI.Extensions;
 
 namespace ProductJudgeAPI.Features.User.Login;
@@ -19,7 +17,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 
     public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
-        var filter = Builders<Entities.Product>.Filter.Eq(u => u.Email, request.Email);
+        var filter = Builders<Entities.User>.Filter.Eq(u => u.Email, request.Email);
         var users = await applicationDbContext
             .GetAsync(filter);
 

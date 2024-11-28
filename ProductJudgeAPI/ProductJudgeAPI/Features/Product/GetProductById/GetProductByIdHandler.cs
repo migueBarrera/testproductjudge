@@ -1,24 +1,21 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using ProductJudgeAPI.Context;
 
 namespace ProductJudgeAPI.Features.Product.GetProductByCategoryId;
 
 public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, IEnumerable<GetProductByIdResponse>>
 {
-    private readonly AppDbContext applicationDbContext;
+    private readonly ProductService applicationDbContext;
 
-    public GetProductByIdHandler(AppDbContext applicationDbContext)
+    public GetProductByIdHandler(ProductService applicationDbContext)
     {
         this.applicationDbContext = applicationDbContext;
     }
 
     public async Task<IEnumerable<GetProductByIdResponse>> Handle(GetProductByIdRequest request, CancellationToken cancellationToken)
     {
-        var items = await applicationDbContext
-            .Products
-            .Where(x => x.CategoryId == request.CategoryId)
-            .ToListAsync(cancellationToken);
+
+        //var filter = Builders<Entities.Product>.Filter.Eq(u => u.CategoryId, request.CategoryId);
+        var items = await applicationDbContext.GetAsync();
 
         return items.Select(x => new GetProductByIdResponse()
         {

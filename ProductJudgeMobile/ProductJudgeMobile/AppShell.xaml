@@ -14,9 +14,9 @@
     xmlns:newProduct="clr-namespace:ProductJudgeMobile.Features.NewProduct"
     Title="ProductJudgeMobile">
 
-    <ShellContent
+    <!--<ShellContent
         Title="ListProductsPage"
-        ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />
+        ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />-->
     
     <ShellContent
         Title="Login"

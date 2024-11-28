@@ -19,9 +19,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
             Description = request.Description,
         };
 
-        applicationDbContext.Products.Add(product);
-
-        await applicationDbContext.SaveChangesAsync(cancellationToken);
+        await applicationDbContext.CreateAsync(product);
 
         return new CreateProductResponse()
         {
