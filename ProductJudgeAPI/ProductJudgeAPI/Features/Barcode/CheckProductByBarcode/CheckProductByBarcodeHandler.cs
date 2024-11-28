@@ -1,25 +1,23 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using ProductJudgeAPI.Context;
-using ProductJudgeAPI.Extensions;
-using ProductJudgeAPI.Features.User.Login;
+using MongoDB.Driver;
+using ProductJudgeAPI.Entities;
 
 namespace ProductJudgeAPI.Features.Barcode.CheckProductByBarcode;
 
 public class CheckProductByBarcodeHandler : IRequestHandler<CheckProductByBarcodeRequest, CheckProductByBarcodeResponse>
 {
-    private readonly AppDbContext applicationDbContext;
+    private readonly BooksService applicationDbContext;
 
-    public CheckProductByBarcodeHandler(AppDbContext applicationDbContext)
+    public CheckProductByBarcodeHandler(BooksService applicationDbContext)
     {
         this.applicationDbContext = applicationDbContext;
     }
 
     public async Task<CheckProductByBarcodeResponse> Handle(CheckProductByBarcodeRequest request, CancellationToken cancellationToken)
     {
+        var filter = Builders<Book>.Filter.Eq(b => b.Author, "Gabriel García Márquez");
         var existBarcode = await applicationDbContext
-            .Barcodes
-            .FirstOrDefaultAsync(x => x.Value == request.Barcode, cancellationToken);
+            .GetAsync(filter);
 
         if (existBarcode is null)
         {

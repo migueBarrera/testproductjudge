@@ -6,10 +6,10 @@ namespace ProductJudgeAPI
 {
     public class BooksService
     {
-        private readonly IMongoCollection<Book> _booksCollection;
+        public readonly IMongoCollection<Book> _booksCollection;
 
         public BooksService(
-            IOptions<BookStoreDatabaseSettings> bookStoreDatabaseSettings)
+            IOptions<StoreDatabaseSettings> bookStoreDatabaseSettings)
         {
             var mongoClient = new MongoClient(
                 bookStoreDatabaseSettings.Value.ConnectionString);
@@ -19,6 +19,12 @@ namespace ProductJudgeAPI
 
             _booksCollection = mongoDatabase.GetCollection<Book>(
                 bookStoreDatabaseSettings.Value.BooksCollectionName);
+        }
+
+        public async Task<List<Book>> GetAsync(FilterDefinition<Book>? filter = null)
+        {
+            filter ??= Builders<Book>.Filter.Empty;  // Usa un filtro vacío si no se proporciona ninguno
+            return await _booksCollection.Find(filter).ToListAsync();
         }
 
         public async Task<List<Book>> GetAsync() =>

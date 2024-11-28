@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using ProductJudgeAPI.Context;
 using ProductJudgeAPI.Entities;
 using ProductJudgeAPI.Extensions;
+using ProductJudgeAPI.Features.Product;
+using ProductJudgeAPI.Features.User;
 using Scalar.AspNetCore;
 using System.Reflection;
 
@@ -14,9 +16,11 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.Configure<BookStoreDatabaseSettings>(
+        builder.Services.Configure<StoreDatabaseSettings>(
             builder.Configuration.GetSection("BookStoreDatabase"));
         builder.Services.AddSingleton<BooksService>();
+        builder.Services.AddTransient<UserService>();
+        builder.Services.AddTransient<ProductService>();
         // Add services to the container.
 
         builder.Services.AddControllers();
@@ -29,10 +33,10 @@ public class Program
         //{
         //    options.UseSqlServer(connectionString);
         //});
-        builder.Services.AddDbContext<AppDbContext>(options =>
-        {
-            options.UseInMemoryDatabase("ImMemoryDb");
-        });
+        //builder.Services.AddDbContext<AppDbContext>(options =>
+        //{
+        //    options.UseInMemoryDatabase("ImMemoryDb");
+        //});
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
