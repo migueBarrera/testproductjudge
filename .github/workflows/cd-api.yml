@@ -32,6 +32,5 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        file: ProductJudgeAPI/ProductJudgeAPI/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/productjudgeapitest:latest
