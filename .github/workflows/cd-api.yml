@@ -8,6 +8,7 @@ on:
       - "**.md"
       - '**/*.gitignore'
       - '**/*.gitattributes'
+      - '.github/workflows/cd-mobile.yml'
       - 'ProductJudgeMobile/ProductJudge.Mobile.DAL/**'
       - 'ProductJudgeMobile/ProductJudgeMobile/**'
 
@@ -33,4 +34,4 @@ jobs:
       with:
         file: ProductJudgeAPI/ProductJudgeAPI/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/ProductJudgeAPITEST:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/productjudgeapitest:latest
