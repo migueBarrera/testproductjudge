@@ -8,9 +8,7 @@ on:
       - "**.md"
       - '**/*.gitignore'
       - '**/*.gitattributes'
-      - 'ProductAPI/**'
-  pull_request:
-    branches: [ "main" ]
+      - 'ProductJudgeAPI/**'
 
 env:
   DOTNET_VERSION: 9.0.100

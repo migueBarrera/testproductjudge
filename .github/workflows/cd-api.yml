@@ -1,9 +1,15 @@
 name: Build and Push Docker Image
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+    paths-ignore:
+      - "**.md"
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+      - 'ProductJudgeMobile/ProductJudge.Mobile.DAL/**'
+      - 'ProductJudgeMobile/ProductJudgeMobile/**'
 
 jobs:
   build:
@@ -25,7 +31,6 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        context: .
         file: ProductJudgeAPI/ProductJudgeAPI/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/your-image-name:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/ProductJudgeAPITEST:latest
