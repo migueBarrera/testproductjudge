@@ -47,4 +47,4 @@ jobs:
         app-name: 'testproductjudge'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_258b220c509f4c088723d95266c7af57 }}
-        images: 'index.docker.io/${{ secrets.DOCKER_USERNAME }}/productjudgeapi:latest'
+        images: 'index.docker.io/${{ secrets.DOCKER_USERNAME }}/productjudgeapitest:latest'
