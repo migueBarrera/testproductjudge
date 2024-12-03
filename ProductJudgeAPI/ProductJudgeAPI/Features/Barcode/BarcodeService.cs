@@ -8,6 +8,10 @@ public class BarcodeService : MongoServiceBase<Entities.Barcode>
 {
     public BarcodeService(IOptions<StoreDatabaseSettings> bookStoreDatabaseSettings) : base(bookStoreDatabaseSettings)
     {
-        _collectionName = bookStoreDatabaseSettings.Value.BarcodeCollectionName;
+    }
+
+    public override string CollectionName()
+    {
+        return bookStoreDatabaseSettings.Value.BarcodeCollectionName;
     }
 }

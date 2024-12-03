@@ -9,9 +9,12 @@ public abstract class MongoServiceBase<T> : IMongoService<T>
     protected readonly IMongoCollection<T> _collection;
 
     protected string _collectionName = string.Empty;
+    protected IOptions<StoreDatabaseSettings> bookStoreDatabaseSettings;
 
     protected MongoServiceBase(IOptions<StoreDatabaseSettings> bookStoreDatabaseSettings)
     {
+        this.bookStoreDatabaseSettings = bookStoreDatabaseSettings;
+
         var mongoClient = new MongoClient(
             bookStoreDatabaseSettings.Value.ConnectionString);
 
@@ -51,8 +54,5 @@ public abstract class MongoServiceBase<T> : IMongoService<T>
         await _collection.DeleteOneAsync(filter);
     }
 
-    public string CollectionName()
-    {
-        return _collectionName;
-    }
+    public abstract string CollectionName();
 }
