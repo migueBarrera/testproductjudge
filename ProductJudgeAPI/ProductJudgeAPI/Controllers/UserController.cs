@@ -30,7 +30,15 @@ public class UserController : ControllerBase
     [HttpPost(Name = "Register")]
     public async Task<IActionResult> Add(RegisterRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await _mediator.Send(request, cancellationToken);
-        return Ok(response);
+        try
+        {
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+
+            return Ok(e);
+        }
     }
 }

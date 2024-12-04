@@ -30,15 +30,7 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddTokenAuthentication(builder.Configuration);
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-        //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        //builder.Services.AddDbContext<AppDbContext>(options =>
-        //{
-        //    options.UseSqlServer(connectionString);
-        //});
-        //builder.Services.AddDbContext<AppDbContext>(options =>
-        //{
-        //    options.UseInMemoryDatabase("ImMemoryDb");
-        //});
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
