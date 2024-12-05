@@ -30,7 +30,6 @@ public class UserController : ControllerBase
     [HttpPost(Name = "Register")]
     public async Task<IActionResult> Add([FromBody]RegisterRequest request, CancellationToken cancellationToken = default)
     {
-        return Ok("Que pasa joder");
         try
         {
             var response = await _mediator.Send(request, cancellationToken);

@@ -16,20 +16,30 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
 
     public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
-        var user = new Entities.User()
+        try
         {
-            Email = request.Email,
-            Name = request.Name,
-            Password = request.Password,
-        };
+            var user = new Entities.User()
+            {
+                Email = request.Email,
+                Name = request.Name,
+                Password = request.Password,
+            };
 
-        await applicationDbContext.CreateAsync(user);
+            await applicationDbContext.CreateAsync(user);
 
-        return new RegisterResponse()
+            return new RegisterResponse()
+            {
+                Email = user.Email,
+                Token = jwtSecurityTokenService.BuildToken(),
+                RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
+            };
+        }
+        catch (Exception e)
         {
-            Email = user.Email,
-            Token = jwtSecurityTokenService.BuildToken(),
-            RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
-        };
+            return new RegisterResponse()
+            {
+                Email = e.Message,
+            };
+        }
     }
 }
