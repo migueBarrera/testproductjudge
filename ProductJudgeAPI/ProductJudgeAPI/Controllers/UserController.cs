@@ -28,7 +28,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost(Name = "Register")]
-    public async Task<IActionResult> Add(RegisterRequest request, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Add([FromBody]RegisterRequest request, CancellationToken cancellationToken = default)
     {
         return Ok("test");
         //try
