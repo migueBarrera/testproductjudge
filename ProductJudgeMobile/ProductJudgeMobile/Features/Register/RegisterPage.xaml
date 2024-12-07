@@ -7,7 +7,8 @@
              Title="RegisterPage">
     <VerticalStackLayout >
         <Entry Placeholder="Usuario" Text="{Binding UserName}"/>
-        <Entry Placeholder="Contraseña" Text="{Binding Password}" IsPassword="True"/>
+        <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email"/>
+        <Entry Placeholder="Contraseña" Text="{Binding Password}" IsPassword="True" />
         <Button
             Text="Registrarse"
             Command="{Binding RegisterCommand}" />

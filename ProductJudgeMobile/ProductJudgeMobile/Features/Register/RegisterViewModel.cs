@@ -12,11 +12,15 @@ public partial class RegisterViewModel : ObservableObject
         this.registerService = registerService;
 
         UserName = "test1";
+        Email = "test1@test.com";
         Password = "test1";
     }
 
     [ObservableProperty]
     private string userName = string.Empty;
+    
+    [ObservableProperty]
+    private string email = string.Empty;
 
     [ObservableProperty]
     private string password = string.Empty;
@@ -24,21 +28,20 @@ public partial class RegisterViewModel : ObservableObject
     [RelayCommand]
     private async Task Register()
     {
-        if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password))
+        if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Email))
         {
-            var response = await registerService.Register(UserName, Password);
-            if (response.IsSuccess)
-            {
-                await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
-            }
-            else
-            {
-                await ShowErrorDialog("Invalid username or password");
-            }
+            await ShowErrorDialog("Fill data");
+            return;
+        }
+
+        var response = await registerService.Register(UserName,Email, Password);
+        if (response.IsSuccess)
+        {
+            await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
         }
         else
         {
-            await ShowErrorDialog("Fill data");
+            await ShowErrorDialog("Invalid username or password");
         }
     }
 

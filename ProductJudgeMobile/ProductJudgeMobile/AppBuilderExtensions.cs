@@ -35,6 +35,7 @@ internal static class AppBuilderExtensions
         builder.Services.AddTransient<ListProductsService>();
         builder.Services.AddTransient<ProductDetailService>();
         builder.Services.AddTransient<BarcodeService>();
+        builder.Services.AddTransient<CreateProductService>();
 
         return builder;
     }

@@ -19,14 +19,15 @@ public class RegisterService
         authApi = Refit.RestService.For<IAuthApi>(httpClient);
     }
 
-    internal async Task<ApiResultResponse> Register(string username, string password)
+    internal async Task<ApiResultResponse> Register(string username,string email, string password)
     {
         try
         {
             var response = await authApi.Register(new RegisterRequestDto
             {
-                Email = username,
-                Password = password
+                Email = email,
+                Password = password,
+                Name = username
             });
 
             if (response == null)

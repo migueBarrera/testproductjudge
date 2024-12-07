@@ -54,6 +54,14 @@ public partial class NewProductViewModel : ObservableObject
 
         var apiResponse = await createProductService.CreateProduct(ProductName, ProductDescription);
 
-        await Application.Current.MainPage.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
+        if (apiResponse.IsSuccess)
+        {
+            await Application.Current.MainPage.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
+        }
+        else
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", "No se ha podido crear el producto", "OK");
+
+        }
     }
 }
