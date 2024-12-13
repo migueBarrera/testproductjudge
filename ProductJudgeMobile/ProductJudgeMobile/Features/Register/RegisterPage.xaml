@@ -5,12 +5,107 @@
              x:Class="ProductJudgeMobile.Features.Register.RegisterPage"
              x:DataType="local:RegisterViewModel"
              Title="RegisterPage">
-    <VerticalStackLayout >
-        <Entry Placeholder="Usuario" Text="{Binding UserName}"/>
-        <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email"/>
-        <Entry Placeholder="Contraseña" Text="{Binding Password}" IsPassword="True" />
+    <ContentPage.Resources>
+        <Style
+            x:Key="EntryStyle"
+            TargetType="Entry">
+            <Setter
+                Property="HeightRequest"
+                Value="50" />
+            <Setter
+                Property="Margin"
+                Value="0,10" />
+            <Setter
+                Property="BackgroundColor"
+                Value="White" />
+            <Setter
+                Property="TextColor"
+                Value="#333333" />
+            <Setter
+                Property="PlaceholderColor"
+                Value="#888888" />
+            <Setter
+                Property="FontSize"
+                Value="16" />
+            <Setter
+                Property="VerticalOptions"
+                Value="Center" />
+            <Setter
+                Property="HorizontalOptions"
+                Value="FillAndExpand" />
+
+        </Style>
+
+        <Style
+            x:Key="ButtonStyle"
+            TargetType="Button">
+            <Setter
+                Property="HeightRequest"
+                Value="50" />
+            <Setter
+                Property="Margin"
+                Value="0,20" />
+            <Setter
+                Property="BackgroundColor"
+                Value="#007ACC" />
+            <Setter
+                Property="TextColor"
+                Value="White" />
+            <Setter
+                Property="FontSize"
+                Value="18" />
+            <Setter
+                Property="CornerRadius"
+                Value="10" />
+            <Setter
+                Property="VerticalOptions"
+                Value="Center" />
+            <Setter
+                Property="HorizontalOptions"
+                Value="FillAndExpand" />
+        </Style>
+
+        <Style
+            x:Key="TitleLabelStyle"
+            TargetType="Label">
+            <Setter
+                Property="FontSize"
+                Value="24" />
+            <Setter
+                Property="TextColor"
+                Value="White" />
+            <Setter
+                Property="HorizontalOptions"
+                Value="Center" />
+            <Setter
+                Property="Margin"
+                Value="0,40,0,20" />
+            <Setter
+                Property="FontAttributes"
+                Value="Bold" />
+        </Style>
+    </ContentPage.Resources>
+    <VerticalStackLayout
+        Spacing="15"
+        VerticalOptions="Center"
+        Padding="30,0">
+        <Entry
+            Placeholder="Usuario"
+            Text="{Binding UserName}"
+            Style="{StaticResource EntryStyle}" />
+        <Entry
+            Placeholder="Email"
+            Text="{Binding Email}"
+            Keyboard="Email"
+            Style="{StaticResource EntryStyle}" />
+        <Entry
+            Placeholder="Contraseña"
+            Text="{Binding Password}"
+            IsPassword="True"
+            Style="{StaticResource EntryStyle}" />
         <Button
             Text="Registrarse"
+            Style="{StaticResource ButtonStyle}"
             Command="{Binding RegisterCommand}" />
     </VerticalStackLayout>
 </ContentPage>

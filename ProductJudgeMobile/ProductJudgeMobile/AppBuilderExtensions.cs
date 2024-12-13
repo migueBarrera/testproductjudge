@@ -40,7 +40,7 @@ internal static class AppBuilderExtensions
         return builder;
     }
 
-    internal static MauiAppBuilder RegisterHttpClients(this MauiAppBuilder builder)
+    internal static MauiAppBuilder RegisterHttpClients(this MauiAppBuilder builder) 
     {
         builder.Services
             .AddHttpClient(HttpClients.FAKE_API, httpClient =>

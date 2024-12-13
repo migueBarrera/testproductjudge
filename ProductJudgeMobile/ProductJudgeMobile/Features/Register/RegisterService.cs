@@ -9,9 +9,9 @@ namespace ProductJudgeMobile.Features.Register;
 public class RegisterService
 {
     private readonly IAuthApi authApi;
-    private readonly ILogger<RegisterService> logger;
+    private readonly ILogger logger;
 
-    public RegisterService(ILogger<RegisterService> logger, IHttpClientFactory httpClientFactory)
+    public RegisterService(ILogger logger, IHttpClientFactory httpClientFactory)
     {
         this.logger = logger;
 
@@ -23,6 +23,7 @@ public class RegisterService
     {
         try
         {
+            logger.LogError("test", "test");
             var response = await authApi.Register(new RegisterRequestDto
             {
                 Email = email,

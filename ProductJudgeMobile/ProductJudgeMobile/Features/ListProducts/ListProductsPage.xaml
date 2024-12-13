@@ -15,19 +15,24 @@
         <CollectionView.ItemTemplate>
             <DataTemplate
                 x:DataType="local:ItemProduct">
-                <Border
-                    HorizontalOptions="Center">
-                    <VerticalStackLayout>
+                <Border Margin="8,4" Padding="8">
+                    <Border.StrokeShape>
+                        <RoundRectangle
+                            CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto"> 
                         <Image
                             Source="{Binding Image}"
-                            HeightRequest="150"
-                            WidthRequest="150"
+                            HeightRequest="80"
+                            WidthRequest="80"
                             Aspect="AspectFit" />
                         <Label
-                            Text="{Binding Name}" />
+                            Text="{Binding Name}" TextColor="Black" Grid.Column="1" Grid.Row="0"/>
                         <Label
-                            Text="{Binding Description}" />
-                    </VerticalStackLayout>
+                            Text="{Binding Description}"
+                            Grid.Column="1"
+                            Grid.Row="2" />
+                    </Grid>
                 </Border>
 
             </DataTemplate>

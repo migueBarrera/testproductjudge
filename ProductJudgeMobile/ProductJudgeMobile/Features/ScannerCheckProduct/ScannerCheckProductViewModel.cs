@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using ProductJudgeMobile.Features.NewProduct;
 using ZXing.Net.Maui;
 
 namespace ProductJudgeMobile.Features.ScannerCheckProduct;
@@ -39,19 +40,20 @@ public partial class ScannerCheckProductViewModel : ObservableObject
         if (apiResponse.IsError)
         {
             await Shell.Current.DisplayAlert("Api error", apiResponse.ErrorMessage, "Ok");
+            return;
+        }
+
+        if (apiResponse.Value!.ExistProduct)
+        {
+            await Shell.Current.DisplayAlert("Product found", $"Product found id: {apiResponse.Value!.ProductId}", "OK");
         }
         else
         {
-            if (apiResponse.Value!.ExistProduct)
+            bool addNewProduct = await Shell.Current.DisplayAlert("Product not found", "¿Quieres añadirlo?", "Si", "No");
+            if (addNewProduct)
             {
-                await Shell.Current.DisplayAlert("Product found", $"Product found id: {apiResponse.Value!.ProductId}", "OK");
-            }
-            else
-            {
-                await Shell.Current.DisplayAlert("Product not found", "Product not found", "OK");
+                await Shell.Current.GoToAsync($"/{nameof(NewProductPage)}");
             }
         }
-        
-
     }
 }

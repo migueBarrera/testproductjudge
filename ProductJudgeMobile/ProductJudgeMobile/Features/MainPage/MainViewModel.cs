@@ -9,9 +9,17 @@ namespace ProductJudgeMobile.Features.MainPage;
 public partial class MainViewModel : ObservableObject
 {
     [RelayCommand]
-    private Task AddProduct()
+    private async Task AddProduct()
     {
-        return Shell.Current.GoToAsync($"/{nameof(NewProductPage)}");
+        bool hasBarcode = await Shell.Current.DisplayAlert("Nuevo producto", "¿Tiene código de barras?", "Si", "No");
+        if (hasBarcode)
+        {
+            await Shell.Current.GoToAsync($"/{nameof(ScannerCheckProductPage)}");
+        }
+        else
+        {
+            await Shell.Current.GoToAsync($"/{nameof(NewProductPage)}");
+        }
     }
 
     [RelayCommand]
