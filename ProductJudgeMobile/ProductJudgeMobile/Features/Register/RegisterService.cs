@@ -9,9 +9,9 @@ namespace ProductJudgeMobile.Features.Register;
 public class RegisterService
 {
     private readonly IAuthApi authApi;
-    private readonly ILogger logger;
+    private readonly ILogger<RegisterService> logger;
 
-    public RegisterService(ILogger logger, IHttpClientFactory httpClientFactory)
+    public RegisterService(ILogger<RegisterService> logger, IHttpClientFactory httpClientFactory)
     {
         this.logger = logger;
 
