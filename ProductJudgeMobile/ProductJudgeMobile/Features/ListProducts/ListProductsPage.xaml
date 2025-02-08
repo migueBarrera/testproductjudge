@@ -20,18 +20,25 @@
                         <RoundRectangle
                             CornerRadius="8" />
                     </Border.StrokeShape>
-                    <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto"> 
+                    <Grid ColumnDefinitions="auto,*" RowDefinitions="auto"> 
                         <Image
-                            Source="{Binding Image}"
+                            Source="https://dreamfood.es/10579-large_default/cocacola-original-330ml.jpg"
                             HeightRequest="80"
                             WidthRequest="80"
                             Aspect="AspectFit" />
-                        <Label
-                            Text="{Binding Name}" TextColor="Black" Grid.Column="1" Grid.Row="0"/>
-                        <Label
-                            Text="{Binding Description}"
+                        <VerticalStackLayout
                             Grid.Column="1"
-                            Grid.Row="2" />
+                            Grid.Row="0">
+                            <Label
+                                Text="{Binding Name}"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                VerticalOptions="Center"
+                                 />
+                            <Label
+                                Text="{Binding Description}"
+                                VerticalTextAlignment="Center" />
+                        </VerticalStackLayout>
                     </Grid>
                 </Border>
 

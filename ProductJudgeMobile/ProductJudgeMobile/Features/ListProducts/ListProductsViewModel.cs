@@ -16,10 +16,10 @@ public partial class ListProductsViewModel : CoreViewModel
     }
 
     [ObservableProperty]
-    private IEnumerable<GetAllProductResponseDto> products = new List<GetAllProductResponseDto>();
+    private IEnumerable<ItemProduct> products = new List<ItemProduct>();
 
     [ObservableProperty]
-    private GetAllProductResponseDto? selected;
+    private ItemProduct? selected;
 
     public override async Task OnAppearingAsync()
     {
@@ -30,7 +30,7 @@ public partial class ListProductsViewModel : CoreViewModel
     private async Task GetProducts()
     {
         IEnumerable<GetAllProductResponseDto> response = await listProductsService.GetProducts();
-        Products = response.ToList();
+        Products = response.Select(x => new ItemProduct(x)).ToList();
     }
 
     [RelayCommand]
