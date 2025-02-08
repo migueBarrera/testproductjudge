@@ -21,13 +21,13 @@ public class LoginService
         authApi = Refit.RestService.For<IAuthApi>(httpClient);
     }
 
-    internal async Task<ApiResultResponse> Login(string username, string password)
+    internal async Task<ApiResultResponse> Login(string email, string password)
     {
         try
         {
             var response = await authApi.Login(new LoginRequestDto
             {
-                Email = username,
+                Email = email,
                 Password = password
             });
 

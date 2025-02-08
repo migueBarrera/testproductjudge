@@ -10,6 +10,7 @@ public static class ApiConstants
         public const string Product = "product";
         public const string Category = "category";
         public const string User = "user";
+        public const string Barcode = "Barcode";
         public const string Token = "token";
     }
 
@@ -21,5 +22,6 @@ public static class ApiConstants
         public const string Category = "category";
         public const string User = "user";
         public const string Token = "token";
+        public const string Barcode = "Barcode";
     }
 }

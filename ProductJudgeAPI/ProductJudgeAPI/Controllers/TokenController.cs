@@ -2,9 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProductJudgeAPI;
 using ProductJudgeAPI.Features.Token.RefreshToken;
-using System.Threading;
 
 namespace ProductJudgeAPI.Controllers;
 

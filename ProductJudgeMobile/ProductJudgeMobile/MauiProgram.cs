@@ -1,3 +1,5 @@
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 using ZXing.Net.Maui.Controls;
@@ -13,6 +15,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseBarcodeReader()
             .RegisterHttpClients()
+            .UseMauiCommunityToolkit()
             .RegisterPagesAndViewModels()
             .ConfigureFonts(fonts =>
             {

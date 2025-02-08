@@ -12,12 +12,12 @@ public partial class LoginViewModel : ObservableObject
     {
         this.loginService = loginService;
 
-        UserName = "test";
+        Email = "test";
         Password = "test";
     }
 
     [ObservableProperty]
-    private string userName = string.Empty;
+    private string email = string.Empty;
 
     [ObservableProperty]
     private string password = string.Empty;
@@ -26,21 +26,19 @@ public partial class LoginViewModel : ObservableObject
     [RelayCommand]
     private async Task Enter()
     {
-        if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password))
+        if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
         {
-            var response = await loginService.Login(UserName, Password);
-            if (response.IsSuccess)
-            {
-                await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
-            }
-            else
-            {
-                await ShowErrorDialog("Invalid username or password");
-            }
+            await ShowErrorDialog("Fill data");
+        }
+
+        var response = await loginService.Login(Email, Password);
+        if (response.IsSuccess)
+        {
+            await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
         }
         else
         {
-            await ShowErrorDialog("Fill data");
+            await ShowErrorDialog("Invalid username or password");
         }
     }
 

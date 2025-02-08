@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProductJudgeAPI.Features.User.Register;
 
 namespace ProductJudgeAPI.Features.Token.RefreshToken;
 

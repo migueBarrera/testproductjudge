@@ -4,7 +4,7 @@ public class CreateJudgeResponse
 {
     public string Text = string.Empty;
 
-    public int UserId { get; set; }
+    public string UserId { get; set; } = string.Empty;
 
-    public int ProductId { get; set; }
+    public string ProductId { get; set; } = string.Empty;
 }

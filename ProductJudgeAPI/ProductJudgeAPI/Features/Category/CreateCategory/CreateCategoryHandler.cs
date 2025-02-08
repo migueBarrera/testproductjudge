@@ -1,13 +1,12 @@
 ﻿using MediatR;
-using ProductJudgeAPI.Context;
 
 namespace ProductJudgeAPI.Features.Category.CreateCategory;
 
 public class CreateCategoryHandler : IRequestHandler<CreateCategoryRequest, CreateCategoryResponse>
 {
-    private readonly AppDbContext applicationDbContext;
+    private readonly CategoryService applicationDbContext;
 
-    public CreateCategoryHandler(AppDbContext applicationDbContext)
+    public CreateCategoryHandler(CategoryService applicationDbContext)
     {
         this.applicationDbContext = applicationDbContext;
     }
@@ -19,9 +18,7 @@ public class CreateCategoryHandler : IRequestHandler<CreateCategoryRequest, Crea
             Name = request.Name,
         };
 
-        applicationDbContext.Categories.Add(category);
-
-        await applicationDbContext.SaveChangesAsync(cancellationToken);
+        await applicationDbContext.CreateAsync(category);
 
         return new CreateCategoryResponse()
         {

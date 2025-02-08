@@ -1,8 +1,6 @@
 ﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProductJudge.Api.Models.Products;
 using ProductJudgeAPI.Features.Product.CreateProduct;
 using ProductJudgeAPI.Features.Product.GetAllProducts;
 using ProductJudgeAPI.Features.Product.GetProductByCategoryId;
@@ -23,20 +21,19 @@ public class ProductController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet(Name = "GetProductsByCategoryId")]
-    public async Task<ActionResult<IEnumerable<GetProductByCategoryIdResponse>>> GetByCategoryId(CancellationToken cancellationToken = default)
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<IEnumerable<GetProductByIdResponse>>> GetByCategoryId(int id,CancellationToken cancellationToken = default)
     {
-        var response = await _mediator.Send(new GetProductByCategoryIdRequest(), cancellationToken);
+        var response = await _mediator.Send(new GetProductByIdRequest(), cancellationToken);
         return Ok(response);
     }
 
-    //[HttpGet(Name = "GetAllProductss")]
-    //[Route("getall")]
-    //public async Task<ActionResult<IEnumerable<GetAllProductsResponse>>> GetAll(CancellationToken cancellationToken = default)
-    //{
-    //    var response = await _mediator.Send(new GetAllProductsRequest(), cancellationToken);
-    //    return Ok(response);
-    //}
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<GetAllProductsResponse>>> GetAll(CancellationToken cancellationToken = default)
+    {
+        var response = await _mediator.Send(new GetAllProductsRequest(), cancellationToken);
+        return Ok(response);
+    }
 
     [HttpPost(Name = "AddProduct")]
     public async Task<ActionResult<CreateProductResponse>> Add(CreateProductRequest request, CancellationToken cancellationToken = default)

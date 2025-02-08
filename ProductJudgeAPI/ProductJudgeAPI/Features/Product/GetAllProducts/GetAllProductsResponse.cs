@@ -1,8 +1,7 @@
 ﻿using ProductJudge.Api.Models.Products;
 
-namespace ProductJudgeAPI.Features.Product.GetAllProducts
+namespace ProductJudgeAPI.Features.Product.GetAllProducts;
+
+public class GetAllProductsResponse : GetAllProductResponseDto
 {
-    public class GetAllProductsResponse : GetAllProductResponseDto
-    {
-    }
 }

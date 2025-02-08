@@ -1,8 +1,6 @@
 ﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProductJudgeAPI;
 using ProductJudgeAPI.Features.User.Login;
 using ProductJudgeAPI.Features.User.Register;
 
@@ -30,9 +28,17 @@ public class UserController : ControllerBase
     }
 
     [HttpPost(Name = "Register")]
-    public async Task<IActionResult> Add(RegisterRequest request, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Add([FromBody]RegisterRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await _mediator.Send(request, cancellationToken);
-        return Ok(response);
+        try
+        {
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+
+            return Ok(e);
+        }
     }
 }

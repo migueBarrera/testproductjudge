@@ -1,7 +1,10 @@
-
-using Microsoft.EntityFrameworkCore;
-using ProductJudgeAPI.Context;
+using ProductJudgeAPI.Entities;
 using ProductJudgeAPI.Extensions;
+using ProductJudgeAPI.Features.Barcode;
+using ProductJudgeAPI.Features.Category;
+using ProductJudgeAPI.Features.Judge;
+using ProductJudgeAPI.Features.Product;
+using ProductJudgeAPI.Features.User;
 using Scalar.AspNetCore;
 using System.Reflection;
 
@@ -13,6 +16,13 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Services.Configure<StoreDatabaseSettings>(
+            builder.Configuration.GetSection("BookStoreDatabase"));
+        builder.Services.AddSingleton<BarcodeService>();
+        builder.Services.AddTransient<UserService>();
+        builder.Services.AddTransient<ProductService>();
+        builder.Services.AddTransient<CategoryService>();
+        builder.Services.AddTransient<JudgeService>();
         // Add services to the container.
 
         builder.Services.AddControllers();
@@ -20,15 +30,7 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddTokenAuthentication(builder.Configuration);
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-        //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        //builder.Services.AddDbContext<AppDbContext>(options =>
-        //{
-        //    options.UseSqlServer(connectionString);
-        //});
-        builder.Services.AddDbContext<AppDbContext>(options =>
-        {
-            options.UseInMemoryDatabase("ImMemoryDb");
-        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

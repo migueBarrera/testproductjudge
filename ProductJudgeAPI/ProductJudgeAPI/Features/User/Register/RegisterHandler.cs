@@ -1,15 +1,14 @@
 ﻿using MediatR;
-using ProductJudgeAPI.Context;
 using ProductJudgeAPI.Extensions;
 
 namespace ProductJudgeAPI.Features.User.Register;
 
 public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse>
 {
-    private readonly AppDbContext applicationDbContext;
+    private readonly UserService applicationDbContext;
     private readonly JwtSecurityTokenService jwtSecurityTokenService;
 
-    public RegisterHandler(AppDbContext applicationDbContext, JwtSecurityTokenService jwtSecurityTokenService)
+    public RegisterHandler(UserService applicationDbContext, JwtSecurityTokenService jwtSecurityTokenService)
     {
         this.applicationDbContext = applicationDbContext;
         this.jwtSecurityTokenService = jwtSecurityTokenService;
@@ -17,22 +16,30 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
 
     public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
-        var user = new Entities.User()
+        try
         {
-            Email = request.Email,
-            Name = request.Name,
-            Password = request.Password,
-        };
+            var user = new Entities.User()
+            {
+                Email = request.Email,
+                Name = request.Name,
+                Password = request.Password,
+            };
 
-        applicationDbContext.Users.Add(user);
+            await applicationDbContext.CreateAsync(user);
 
-        await applicationDbContext.SaveChangesAsync(cancellationToken);
-
-        return new RegisterResponse()
+            return new RegisterResponse()
+            {
+                Email = user.Email,
+                Token = jwtSecurityTokenService.BuildToken(),
+                RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
+            };
+        }
+        catch (Exception e)
         {
-            Email = user.Email,
-            Token = jwtSecurityTokenService.BuildToken(),
-            RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
-        };
+            return new RegisterResponse()
+            {
+                Email = e.Message,
+            };
+        }
     }
 }

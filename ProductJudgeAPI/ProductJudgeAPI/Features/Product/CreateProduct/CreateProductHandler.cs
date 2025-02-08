@@ -1,13 +1,12 @@
 ﻿using MediatR;
-using ProductJudgeAPI.Context;
 
 namespace ProductJudgeAPI.Features.Product.CreateProduct;
 
 public class CreateProductHandler : IRequestHandler<CreateProductRequest, CreateProductResponse>
 {
-    private readonly AppDbContext applicationDbContext;
+    private readonly ProductService applicationDbContext;
 
-    public CreateProductHandler(AppDbContext applicationDbContext)
+    public CreateProductHandler(ProductService applicationDbContext)
     {
         this.applicationDbContext = applicationDbContext;
     }
@@ -20,9 +19,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
             Description = request.Description,
         };
 
-        applicationDbContext.Products.Add(product);
-
-        await applicationDbContext.SaveChangesAsync(cancellationToken);
+        await applicationDbContext.CreateAsync(product);
 
         return new CreateProductResponse()
         {
