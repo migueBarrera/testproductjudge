@@ -33,11 +33,13 @@ public static class MauiProgram
                 //        return false;   
                 //}));
 #else
+    #if ANDROID
                 events.AddAndroid(android => android.OnCreate((activity, bundle) =>
                 {
                     Firebase.FirebaseApp.InitializeApp(activity);
                 }));
 #endif
+                #endif
 
 
             });
