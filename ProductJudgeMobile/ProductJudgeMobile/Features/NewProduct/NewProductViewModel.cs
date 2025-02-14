@@ -9,13 +9,13 @@ public partial class NewProductViewModel : ObservableObject
     private readonly CreateProductService createProductService;
 
     [ObservableProperty]
-    private string productName = string.Empty;
+    public partial string ProductName { get; set; } = string.Empty;
 
     [ObservableProperty]
-    private string productDescription = string.Empty;
+    public partial string ProductDescription { get; set; } = string.Empty;
 
     [ObservableProperty]
-    private ObservableCollection<ImageSource> images = [];
+    public partial ObservableCollection<ImageSource> Images { get; set; } = [];
 
     public NewProductViewModel(CreateProductService createProductService)
     {
@@ -48,7 +48,7 @@ public partial class NewProductViewModel : ObservableObject
         if (string.IsNullOrWhiteSpace(ProductName) ||
             string.IsNullOrWhiteSpace(ProductDescription))
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Todos los campos son obligatorios ", "OK");
+            await Application.Current!.Windows[0].Page!.DisplayAlert("Error", "Todos los campos son obligatorios ", "OK");
             return;
         }
 
@@ -56,11 +56,11 @@ public partial class NewProductViewModel : ObservableObject
 
         if (apiResponse.IsSuccess)
         {
-            await Application.Current.MainPage.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
+            await Application.Current!.Windows[0].Page!.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
         }
         else
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "No se ha podido crear el producto", "OK");
+            await Application.Current!.Windows[0].Page!.DisplayAlert("Error", "No se ha podido crear el producto", "OK");
 
         }
     }

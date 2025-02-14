@@ -17,13 +17,13 @@ public partial class RegisterViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private string userName = string.Empty;
+    public partial string UserName { get; set; } = string.Empty;
     
     [ObservableProperty]
-    private string email = string.Empty;
+    public partial string Email { get; set; } = string.Empty;
 
     [ObservableProperty]
-    private string password = string.Empty;
+    public partial string Password { get; set; } = string.Empty;
 
     [RelayCommand]
     private async Task Register()
@@ -47,6 +47,6 @@ public partial class RegisterViewModel : ObservableObject
 
     private Task ShowErrorDialog(string message)
     {
-        return Application.Current.MainPage.DisplayAlert("Error", message, "Ok");
+        return Application.Current!.Windows[0].Page!.DisplayAlert("Error", message, "Ok");
     }
 }

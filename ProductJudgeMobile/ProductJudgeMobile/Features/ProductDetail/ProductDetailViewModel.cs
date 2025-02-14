@@ -10,19 +10,20 @@ public partial class ProductDetailViewModel : ObservableObject
 
     // Propiedades del producto
     [ObservableProperty]
-    private string productImage;
+    public partial string ProductImage { get; set; }
 
     [ObservableProperty]
-    private string productName;
+    public partial string ProductName { get; set; }
 
     [ObservableProperty]
-    private string productDescription;
+    public partial string ProductDescription { get; set; }
 
     [ObservableProperty]
     private ObservableCollection<Review> productReviews;
 
     public ProductDetailViewModel(ProductDetailService productDetailService)
     {
+        this.productDetailService = productDetailService;
         // Ejemplo de datos iniciales
         ProductImage = "https://dreamfood.es/10579-large_default/cocacola-original-330ml.jpg";
         ProductDescription = "Este es un producto excelente que deberías considerar.";
@@ -34,7 +35,6 @@ public partial class ProductDetailViewModel : ObservableObject
             new Review { ReviewerName = "Juan", ReviewText = "Muy buen producto!", ReviewDate = "01/09/2024" },
             new Review { ReviewerName = "Ana", ReviewText = "Cumple con lo prometido.", ReviewDate = "02/09/2024" }
         };
-        this.productDetailService = productDetailService;
     }
 
     // Comando para añadir una nueva opinión

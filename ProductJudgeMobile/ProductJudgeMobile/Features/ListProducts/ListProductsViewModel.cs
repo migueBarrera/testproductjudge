@@ -16,10 +16,10 @@ public partial class ListProductsViewModel : CoreViewModel
     }
 
     [ObservableProperty]
-    private IEnumerable<ItemProduct> products = new List<ItemProduct>();
+    public partial IEnumerable<ItemProduct> Products { get; set; } = new List<ItemProduct>();
 
     [ObservableProperty]
-    private ItemProduct? selected;
+    public partial ItemProduct? Selected { get; set; }
 
     public override async Task OnAppearingAsync()
     {
