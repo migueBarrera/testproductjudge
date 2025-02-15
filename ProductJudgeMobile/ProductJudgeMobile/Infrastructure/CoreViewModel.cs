@@ -8,7 +8,7 @@ public partial class CoreViewModel :
     IBusyViewModel
 {
     [ObservableProperty]
-    private bool isBusy;
+    public partial bool IsBusy { get;set; }
 
     public virtual Task OnAppearingAsync()
     {
