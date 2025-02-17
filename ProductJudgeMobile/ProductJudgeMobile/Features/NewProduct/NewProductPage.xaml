@@ -10,7 +10,6 @@
             Padding="10"
             Spacing="15">
 
-            <!-- Campo para ingresar el nombre del producto -->
             <Label
                 Text="Nombre del Producto"
                 FontSize="16"
@@ -19,7 +18,6 @@
                 Placeholder="Ingresa el nombre"
                 Text="{Binding ProductName}" />
 
-            <!-- Campo para ingresar la descripción del producto -->
             <Label
                 Text="Descripción del Producto"
                 FontSize="16"
@@ -29,9 +27,6 @@
                 Text="{Binding ProductDescription}"
                 HeightRequest="100" />
 
-            <!-- Campo para ingresar la URL de la imagen -->
-         
-           
             <VerticalStackLayout>
                 <Grid ColumnDefinitions="auto, *">
                     <Label
@@ -73,7 +68,6 @@
                 </CollectionView>
             </VerticalStackLayout>
 
-            <!-- Botón para crear el producto -->
             <Button
                 Text="Crear Producto"
                 Command="{Binding CreateProductCommand}"

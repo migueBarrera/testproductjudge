@@ -15,7 +15,11 @@
         <CollectionView.ItemTemplate>
             <DataTemplate
                 x:DataType="local:ItemProduct">
-                <Border Margin="8,4" Padding="8">
+                <Border
+                    Margin="8,4"
+                    Padding="16"
+                    StrokeThickness="2"
+                    Stroke="{StaticResource Grey3}">
                     <Border.StrokeShape>
                         <RoundRectangle
                             CornerRadius="8" />
@@ -31,12 +35,12 @@
                             Grid.Row="0">
                             <Label
                                 Text="{Binding Name}"
-                                TextColor="Black"
-                                FontAttributes="Bold"
+                                Style="{StaticResource BodyXLSemiBoldStyle}"
                                 VerticalOptions="Center"
                                  />
                             <Label
                                 Text="{Binding Description}"
+                                Style="{StaticResource BodyMRegularStyle}"
                                 VerticalTextAlignment="Center" />
                         </VerticalStackLayout>
                     </Grid>

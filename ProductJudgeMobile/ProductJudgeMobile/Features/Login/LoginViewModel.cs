@@ -34,7 +34,7 @@ public partial class LoginViewModel : ObservableObject
         var response = await loginService.Login(Email, Password);
         if (response.IsSuccess)
         {
-            await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
+            await Shell.Current.GoToAsync($"{nameof(MainPage)}");
         }
         else
         {

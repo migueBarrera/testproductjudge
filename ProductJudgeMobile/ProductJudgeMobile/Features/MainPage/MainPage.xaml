@@ -10,9 +10,15 @@
             Padding="30,0"
             VerticalOptions="Center"
             Spacing="25">
-          <Button Text="Añadir producto" Command="{Binding AddProductCommand}"/>
-          <Button Text="Comprobar producto" Command="{Binding CheckProductCommand}"/>
-          <Button Text="Lista de productos" Command="{Binding ListProductsCommand}"/>
+          <Button Text="Añadir producto" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding AddProductCommand}"/>
+            <Button
+                Text="Comprobar producto"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding CheckProductCommand}"/>
+            <Button
+                Text="Lista de productos"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding ListProductsCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 
