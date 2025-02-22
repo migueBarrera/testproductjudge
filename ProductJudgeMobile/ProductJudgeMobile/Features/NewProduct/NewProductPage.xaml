@@ -12,20 +12,25 @@
 
             <Label
                 Text="Nombre del Producto"
-                FontSize="16"
-                FontAttributes="Bold" />
+                Style="{StaticResource BodyMRegularStyle}" />
+                <Border
+            Style="{StaticResource EmailBorderStyle}">
             <Entry
-                Placeholder="Ingresa el nombre"
+                Style="{StaticResource EntryStyle}"
                 Text="{Binding ProductName}" />
+            </Border>
 
             <Label
                 Text="Descripción del Producto"
-                FontSize="16"
-                FontAttributes="Bold" />
+                Style="{StaticResource BodyMRegularStyle}" />
+                <Border
+            Style="{StaticResource EmailBorderStyle}">
             <Editor
                 Placeholder="Ingresa la descripción"
                 Text="{Binding ProductDescription}"
-                HeightRequest="100" />
+                Style="{StaticResource EditorStyle}"
+                MinimumHeightRequest="100" />
+            </Border>
 
             <VerticalStackLayout>
                 <Grid ColumnDefinitions="auto, *">
@@ -33,13 +38,14 @@
                         Text="Imagenes"
                         FontSize="16"
                         VerticalOptions="Center"
-                        FontAttributes="Bold" />
+                        Style="{StaticResource BodyXLSemiBoldStyle}" />
 
                     <Button
                         Grid.Column="1"
                         HorizontalOptions="End"
                         Command="{Binding CaptureImageCommand}"
                         Text="Add Image" 
+                        Style="{StaticResource SecondaryButtonStyle}"
                         VerticalOptions="Center"/>
                 </Grid>
                 
@@ -71,12 +77,7 @@
             <Button
                 Text="Crear Producto"
                 Command="{Binding CreateProductCommand}"
-                BackgroundColor="LightGreen"
-                TextColor="White"
-                FontAttributes="Bold"
-                CornerRadius="10"
-                HorizontalOptions="Center"
-                Padding="10,5" />
+                Style="{StaticResource PrimaryButtonStyle}"/>
 
         </VerticalStackLayout>
     </ScrollView>

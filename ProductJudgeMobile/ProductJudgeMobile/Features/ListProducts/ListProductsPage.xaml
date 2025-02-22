@@ -16,14 +16,10 @@
             <DataTemplate
                 x:DataType="local:ItemProduct">
                 <Border
+                    HeightRequest="80"
                     Margin="8,4"
-                    Padding="16"
-                    StrokeThickness="2"
-                    Stroke="{StaticResource Grey3}">
-                    <Border.StrokeShape>
-                        <RoundRectangle
-                            CornerRadius="8" />
-                    </Border.StrokeShape>
+                    Style="{StaticResource EmailBorderStyle}">
+
                     <Grid ColumnDefinitions="auto,*" RowDefinitions="auto"> 
                         <Image
                             Source="https://dreamfood.es/10579-large_default/cocacola-original-330ml.jpg"

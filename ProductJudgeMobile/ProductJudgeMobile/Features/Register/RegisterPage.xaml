@@ -12,11 +12,11 @@
         Padding="30,0">
         <Label
             Text="Nombre"
-            Margin="4,0"
+            Margin="4,0,0,0"
             HorizontalTextAlignment="Start"
             Style="{StaticResource BodyMRegularStyle}" />
         <Border
-            Margin="0,0,0,16">
+            Style="{StaticResource EmailBorderStyle}">
             <Entry
                 Text="{Binding UserName}"
                 Style="{StaticResource EntryStyle}" />
@@ -24,11 +24,11 @@
 
         <Label
             Text="Email"
-            Margin="4,0"
+            Margin="4,16,0,0"
             HorizontalTextAlignment="Start"
             Style="{StaticResource BodyMRegularStyle}" />
         <Border
-            Margin="0,0,0,16">
+            Style="{StaticResource EmailBorderStyle}">
             <Entry
                 Text="{Binding Email}"
                 Keyboard="Email"
@@ -37,17 +37,18 @@
 
         <Label
             Text="Email"
-            Margin="4,0"
+            Margin="4,16,0,0"
             HorizontalTextAlignment="Start"
             Style="{StaticResource BodyMRegularStyle}" />
         <Border
-            Margin="0,0,0,16">
+            Style="{StaticResource EmailBorderStyle}">
             <Entry
                 Text="{Binding Password}"
                 IsPassword="True"
                 Style="{StaticResource EntryStyle}" />
         </Border>
         <Button
+            Margin="0,16,0,0"
             Text="Registrarse"
             Style="{StaticResource PrimaryButtonStyle}"
             Command="{Binding RegisterCommand}" />
