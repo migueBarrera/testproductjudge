@@ -8,6 +8,9 @@ using ProductJudgeMobile.Features.ProductDetail;
 using ProductJudgeMobile.Features.Register;
 using ProductJudgeMobile.Features.ScannerCheckProduct;
 using SecretAligner.Telemedicine.Mobile.Infrastructure;
+#if ANDROID
+using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+#endif
 
 namespace ProductJudgeMobile;
 
@@ -56,6 +59,38 @@ internal static class AppBuilderExtensions
         });
 #else
     ;
+#endif
+        return builder;
+    }
+
+    internal static MauiAppBuilder RemoveAndroidEntryUnderline(this MauiAppBuilder builder)
+    {
+#if ANDROID
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("NoUnderline", (h, v) =>
+        {
+            h.PlatformView.BackgroundTintList =
+            Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
+        });
+#endif
+        return builder;
+    }
+
+    internal static MauiAppBuilder RegisterFonts(this MauiAppBuilder builder)
+    {
+        builder.ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("Roboto-Bold.ttf", "RobotoBold");
+                fonts.AddFont("Roboto-Regular.ttf", "RobotoRegular");
+                fonts.AddFont("Roboto-SemiBold.ttf", "RobotoSemiBold");
+            }
+            );
+        return builder;
+    }
+
+        internal static MauiAppBuilder ConfigureLogger(this MauiAppBuilder builder)
+    {
+        #if DEBUG
+        builder.Logging.AddDebug();
 #endif
         return builder;
     }
