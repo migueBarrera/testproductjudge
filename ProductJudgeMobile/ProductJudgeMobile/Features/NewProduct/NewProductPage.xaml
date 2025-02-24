@@ -24,9 +24,10 @@
                 Text="Descripción del Producto"
                 Style="{StaticResource BodyMRegularStyle}" />
                 <Border
-            Style="{StaticResource EmailBorderStyle}">
+            Style="{StaticResource EmailBorderStyle}"
+            MinimumHeightRequest="100">
+        
             <Editor
-                Placeholder="Ingresa la descripción"
                 Text="{Binding ProductDescription}"
                 Style="{StaticResource EditorStyle}"
                 MinimumHeightRequest="100" />
@@ -56,11 +57,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border
-                                StrokeThickness="0"
-                                Margin="0,0,8,0"
-                                StrokeShape="RoundRectangle 8"
-                                Background="#2B0B98"
-                                Padding="0"
+                                Style="{StaticResource EmailBorderStyle}"
                                 HeightRequest="200"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center">

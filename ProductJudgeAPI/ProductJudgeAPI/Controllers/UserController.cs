@@ -20,15 +20,15 @@ public class UserController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet(Name = "Login")]
+    [HttpPost("login", Name = "Login")]
     public async Task<IActionResult> Login(LoginRequest request, CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
 
-    [HttpPost(Name = "Register")]
-    public async Task<IActionResult> Add([FromBody]RegisterRequest request, CancellationToken cancellationToken = default)
+    [HttpPost("register", Name = "Register")]
+    public async Task<IActionResult> Add([FromBody] RegisterRequest request, CancellationToken cancellationToken = default)
     {
         try
         {

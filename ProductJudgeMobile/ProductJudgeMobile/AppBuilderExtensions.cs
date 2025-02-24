@@ -71,6 +71,11 @@ internal static class AppBuilderExtensions
             h.PlatformView.BackgroundTintList =
             Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
         });
+         Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("NoUnderlineEditor", (h, v) =>
+        {
+            h.PlatformView.BackgroundTintList =
+            Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
+        });
 #endif
         return builder;
     }

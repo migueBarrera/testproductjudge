@@ -5,10 +5,10 @@ namespace ProductJudge.Mobile.DAL.API;
 
 public interface IAuthApi
 {
-    [Get("/api/user")]
+    [Post("/api/user/login")]
     [Headers("Content-Type: application/json")]
     Task<LoginResponseDto> Login(LoginRequestDto request);
 
-    [Post("/api/user")]
+    [Post("/api/user/register")]
     Task<RegisterResponseDto> Register(RegisterRequestDto request);
 }
