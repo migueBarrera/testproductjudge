@@ -25,6 +25,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
         {
             Id = product.Id,
             Name = product.Name,
+            Description = product.Description,
         };
     }
 }

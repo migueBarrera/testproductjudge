@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProductJudgeAPI.Features.Product.CreateProduct;
 using ProductJudgeAPI.Features.Product.GetAllProducts;
 using ProductJudgeAPI.Features.Product.GetProductByCategoryId;
+using ProductJudgeAPI.Features.Product.UploadImages;
 
 namespace ProductJudgeAPI.Controllers;
 
@@ -35,10 +36,19 @@ public class ProductController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost(Name = "AddProduct")]
+    [HttpPost("create", Name = "create")]
     public async Task<ActionResult<CreateProductResponse>> Add(CreateProductRequest request, CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpPost("uploadImages", Name = "UploadImages")]
+    public async Task<ActionResult<CreateProductResponse>> UploadImages(
+        [FromForm] IFormFileCollection images,
+        CancellationToken cancellationToken = default)
+    {
+        var response = await _mediator.Send(new UploadImagesRequest(){ Images = images }, cancellationToken);
         return Ok(response);
     }
 }

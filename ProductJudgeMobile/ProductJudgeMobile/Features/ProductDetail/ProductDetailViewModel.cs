@@ -1,40 +1,33 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProductJudgeMobile.Features.ListProducts;
 using System.Collections.ObjectModel;
 
 namespace ProductJudgeMobile.Features.ProductDetail;
 
-public partial class ProductDetailViewModel : ObservableObject
+[QueryProperty("Product", nameof(ProductCapsule))]
+public partial class ProductDetailViewModel : ObservableObject, IQueryAttributable
 {
     private ProductDetailService productDetailService;
 
-    // Propiedades del producto
     [ObservableProperty]
-    public partial string ProductImage { get; set; }
+    public partial ItemProduct? ProductCapsule { get; set; }
 
     [ObservableProperty]
-    public partial string ProductName { get; set; }
+    public partial string ProductImage { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string ProductDescription { get; set; }
+    public partial string ProductName { get; set; } = string.Empty;
 
     [ObservableProperty]
-    private ObservableCollection<Review> productReviews;
+    public partial string ProductDescription { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    private ObservableCollection<Review> productReviews = new ObservableCollection<Review>();
 
     public ProductDetailViewModel(ProductDetailService productDetailService)
     {
         this.productDetailService = productDetailService;
-        // Ejemplo de datos iniciales
-        ProductImage = "https://dreamfood.es/10579-large_default/cocacola-original-330ml.jpg";
-        ProductDescription = "Este es un producto excelente que deberías considerar.";
-        ProductName = "Jamón iberico";
-
-        // Opiniones de ejemplo
-        ProductReviews = new ObservableCollection<Review>
-        {
-            new Review { ReviewerName = "Juan", ReviewText = "Muy buen producto!", ReviewDate = "01/09/2024" },
-            new Review { ReviewerName = "Ana", ReviewText = "Cumple con lo prometido.", ReviewDate = "02/09/2024" }
-        };
     }
 
     // Comando para añadir una nueva opinión
@@ -43,5 +36,18 @@ public partial class ProductDetailViewModel : ObservableObject
     {
         // Ejemplo: Añadir una opinión nueva a la lista (aquí podrías abrir una nueva vista para que el usuario ingrese una opinión)
         ProductReviews.Add(new Review { ReviewerName = "Nuevo Usuario", ReviewText = "¡Este producto es increíble!", ReviewDate = "10/09/2024" });
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        ProductCapsule = query["Product"] as ItemProduct;
+
+        if (ProductCapsule != null)
+        {
+            ProductImage = ProductCapsule.Image;
+            ProductName = ProductCapsule.Name;
+            ProductDescription = ProductCapsule.Description;
+            //ProductReviews = new ObservableCollection<Review>(ProductCapsule.Reviews);
+        }
     }
 }

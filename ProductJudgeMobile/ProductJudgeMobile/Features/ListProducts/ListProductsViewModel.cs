@@ -38,8 +38,13 @@ public partial class ListProductsViewModel : CoreViewModel
     {
         if (Selected != null)
         {
+            var navigationParameter = new ShellNavigationQueryParameters
+            {
+                { "Product", Selected }
+            };
+            await Shell.Current.GoToAsync(nameof(ProductDetailPage), navigationParameter);
+
             Selected = null;
-            await Shell.Current.GoToAsync(nameof(ProductDetailPage));
         }
     }
 }

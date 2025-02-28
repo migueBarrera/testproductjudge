@@ -56,6 +56,16 @@ public partial class NewProductViewModel : ObservableObject
 
         if (apiResponse.IsSuccess)
         {
+            if (Images.Count > 0)
+            {
+                var imageResponse = await createProductService.UploadImages(Images);
+                if (!imageResponse.IsSuccess)
+                {
+                    await Application.Current!.Windows[0].Page!.DisplayAlert("Error", "No se han podido subir las imágenes", "OK");
+                    return;
+                }
+            }
+
             await Application.Current!.Windows[0].Page!.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
         }
         else
