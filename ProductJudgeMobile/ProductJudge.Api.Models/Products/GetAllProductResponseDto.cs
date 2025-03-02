@@ -10,5 +10,5 @@ public class GetAllProductResponseDto
 
     public string Description { get; set; } = string.Empty;
 
-    public string Image { get; set; } = string.Empty;
+    public IEnumerable<string> Image { get; set; } = new List<string>();
 }

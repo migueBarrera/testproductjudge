@@ -13,7 +13,7 @@ public class Product
 
     public string Description { get; set; } = string.Empty;
 
-    public string Image { get; set; } = string.Empty;
+    public ICollection<string> Image { get; set; } = new List<string>();
 
     public ICollection<Judge> Judges { get; set; } = new List<Judge>();
 
