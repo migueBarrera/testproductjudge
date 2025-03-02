@@ -51,4 +51,26 @@ public class ProductController : ControllerBase
         var response = await _mediator.Send(new UploadImagesRequest(){ Images = images }, cancellationToken);
         return Ok(response);
     }
+
+    [HttpPost("createWithImages", Name = "CreateWithImages")]
+public async Task<ActionResult<CreateProductResponse>> CreateWithImages(
+    [FromForm] CreateProductWithImagesRequest request,
+    CancellationToken cancellationToken = default)
+{
+    // Deserializar el JSON del producto
+    var productRequest = new CreateProductRequest()
+    {
+        Name = request.Name,
+        Description = request.Description
+    };
+
+    // Procesar la creación del producto
+    var createProductResponse = await _mediator.Send(productRequest, cancellationToken);
+
+    // Procesar la carga de imágenes
+    var uploadImagesResponse = await _mediator.Send(new UploadImagesRequest() { Images = request.Images }, cancellationToken);
+
+    // Aquí podrías combinar las respuestas o manejar la lógica según tus necesidades
+    return Ok(new { createProductResponse, uploadImagesResponse });
+}
 }

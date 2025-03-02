@@ -12,7 +12,7 @@ namespace ProductJudgeAPI.Features.Product.UploadImages;
 public class UploadImagesHandler : IRequestHandler<UploadImagesRequest, UploadImagesResponse>
     {
         private readonly BlobServiceClient _blobServiceClient;
-        private readonly string _containerName = "product-images";
+        private readonly string _containerName = "product-images-test";
 
         public UploadImagesHandler(IConfiguration configuration)
         {
@@ -27,7 +27,9 @@ public class UploadImagesHandler : IRequestHandler<UploadImagesRequest, UploadIm
             try
             {
                 var blobContainerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
-                await blobContainerClient.CreateIfNotExistsAsync();
+                await blobContainerClient.CreateIfNotExistsAsync(
+                    Azure.Storage.Blobs.Models.PublicAccessType.BlobContainer
+                );
 
                 foreach (var image in request.Images)
                 {
