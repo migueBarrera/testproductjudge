@@ -44,7 +44,7 @@ public partial class ProductDetailViewModel : ObservableObject, IQueryAttributab
 
         if (ProductCapsule != null)
         {
-            ProductImage = ProductCapsule.Image;
+            ProductImage = ProductCapsule.Image.FirstOrDefault();
             ProductName = ProductCapsule.Name;
             ProductDescription = ProductCapsule.Description;
             //ProductReviews = new ObservableCollection<Review>(ProductCapsule.Reviews);

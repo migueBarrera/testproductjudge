@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MongoDB.Driver;
 using ProductJudgeAPI.Extensions;
 
 namespace ProductJudgeAPI.Features.User.Register;
@@ -16,30 +17,29 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
 
     public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var user = new Entities.User()
-            {
-                Email = request.Email,
-                Name = request.Name,
-                Password = request.Password,
-            };
+        var filter = Builders<Entities.User>.Filter.Eq(u => u.Email, request.Email);
+        var users = await applicationDbContext
+            .GetAsync(filter);
 
-            await applicationDbContext.CreateAsync(user);
-
-            return new RegisterResponse()
-            {
-                Email = user.Email,
-                Token = jwtSecurityTokenService.BuildToken(),
-                RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
-            };
-        }
-        catch (Exception e)
+        if (users.Any())
         {
-            return new RegisterResponse()
-            {
-                Email = e.Message,
-            };
+            throw new Exception("User register.");
         }
+
+        var newUser = new Entities.User()
+        {
+            Email = request.Email,
+            Name = request.Name,
+            Password = request.Password,
+        };
+
+        await applicationDbContext.CreateAsync(newUser);
+
+        return new RegisterResponse()
+        {
+            Email = newUser.Email,
+            Token = jwtSecurityTokenService.BuildToken(),
+            RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
+        };
     }
 }
