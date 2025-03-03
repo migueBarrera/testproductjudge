@@ -4,6 +4,7 @@
              x:Class="ProductJudgeMobile.Features.NewProduct.NewProductPage"
              xmlns:local="clr-namespace:ProductJudgeMobile.Features.NewProduct"
              x:DataType="local:NewProductViewModel"
+             xmlns:maui="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              Title="NewProductPage">
     <ScrollView>
         <VerticalStackLayout
@@ -55,14 +56,16 @@
                     ItemsLayout="HorizontalList"
                     ItemsSource="{Binding Images}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="maui:StreamImageSource">
                             <Border
                                 Style="{StaticResource EmailBorderStyle}"
                                 HeightRequest="200"
+                                WidthRequest="200"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center">
                                 <Image
                                     Source="{Binding .}"
+                                    HeightRequest="200"
                                     Aspect="AspectFit" />
                             </Border>
                        

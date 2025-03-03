@@ -19,9 +19,10 @@ public class CreateProductService
 
         var httpClient = httpClientFactory.CreateClient(HttpClients.FAKE_API);
         productApi = Refit.RestService.For<IProductsApi>(httpClient);
+
     }
 
-    internal async Task<ApiResultResponse> CreateProduct(string name, string description)
+        internal async Task<ApiResultResponse> CreateProductWithImages(string name, string description,IEnumerable<ImageSource> images)
     {
         try
         {
@@ -30,23 +31,9 @@ public class CreateProductService
                 Name = name,
                 Description = description
             };
-            var response = await productApi.CreateProduct(request);
 
-            return ApiResultResponse.CreateSuccess();
-        }
-        catch (Exception e)
-        {
-            logger.LogError(e, e.Message);
-            return ApiResultResponse.CreateError(e.Message);
-        }
-    }
-
-    internal async Task<ApiResultResponse> UploadImages(IEnumerable<ImageSource> images)
-    {
-        try
-        {
             var list = await ImageHelper.ConvertImagesToStreamParts(images);
-            var response = await productApi.UploadProductImages(list);
+            var response = await productApi.CreateProductWithImages(request.Name, request.Description, list);
 
             return ApiResultResponse.CreateSuccess();
         }
@@ -57,28 +44,39 @@ public class CreateProductService
         }
     }
 
-    public static class ImageHelper
-    {
-        public static async Task<IEnumerable<StreamPart>> ConvertImagesToStreamParts(IEnumerable<ImageSource> images)
-        {
-            var streamParts = new List<StreamPart>();
+    // internal async Task<ApiResultResponse> CreateProduct(string name, string description)
+    // {
+    //     try
+    //     {
+    //         var request = new CreateProductRequestDto()
+    //         {
+    //             Name = name,
+    //             Description = description
+    //         };
+    //         var response = await productApi.CreateProduct(request);
 
-            foreach (var image in images)
-            {
-                // Convert ImageSource to Stream (this method needs to be implemented)
-                var stream = await ConvertImageSourceToStream(image);
-                streamParts.Add(new StreamPart(stream, "image.jpg", "image/jpeg")); // Adjust the name and type as needed
-            }
+    //         return ApiResultResponse.CreateSuccess();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         logger.LogError(e, e.Message);
+    //         return ApiResultResponse.CreateError(e.Message);
+    //     }
+    // }
 
-            return streamParts;
-        }
+    // internal async Task<ApiResultResponse> UploadImages(IEnumerable<ImageSource> images)
+    // {
+    //     try
+    //     {
+    //         var list = await ImageHelper.ConvertImagesToStreamParts(images);
+    //         var response = await productApi.UploadProductImages(list);
 
-        private static async Task<Stream> ConvertImageSourceToStream(ImageSource imageSource)
-        {
-            // Your logic to convert an ImageSource to a Stream
-            // This typically involves rendering the ImageSource to a bitmap and then to a stream
-            // For demonstration, this part is left abstract
-            throw new NotImplementedException();
-        }
-    }
+    //         return ApiResultResponse.CreateSuccess();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         logger.LogError(e, e.Message);
+    //         return ApiResultResponse.CreateError(e.Message);
+    //     }
+    // }
 }

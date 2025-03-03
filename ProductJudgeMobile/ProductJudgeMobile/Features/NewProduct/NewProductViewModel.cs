@@ -27,7 +27,9 @@ public partial class NewProductViewModel : ObservableObject
     {
         if (MediaPicker.Default.IsCaptureSupported)
         {
-            FileResult? photo = await MediaPicker.Default.CapturePhotoAsync();
+            FileResult? photo = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions(){
+
+            });
 
             if (photo != null)
             {
@@ -52,26 +54,33 @@ public partial class NewProductViewModel : ObservableObject
             return;
         }
 
-        var apiResponse = await createProductService.CreateProduct(ProductName, ProductDescription);
-
-        if (apiResponse.IsSuccess)
-        {
-            if (Images.Count > 0)
-            {
-                var imageResponse = await createProductService.UploadImages(Images);
-                if (!imageResponse.IsSuccess)
-                {
-                    await Application.Current!.Windows[0].Page!.DisplayAlert("Error", "No se han podido subir las imágenes", "OK");
-                    return;
-                }
-            }
-
+        var apiResponse = await createProductService.CreateProductWithImages(ProductName, ProductDescription, Images);
+        if (apiResponse.IsSuccess){
             await Application.Current!.Windows[0].Page!.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
-        }
-        else
-        {
+        } else {
             await Application.Current!.Windows[0].Page!.DisplayAlert("Error", "No se ha podido crear el producto", "OK");
-
         }
+
+        // var apiResponse = await createProductService.CreateProduct(ProductName, ProductDescription);
+
+        // if (apiResponse.IsSuccess)
+        // {
+        //     if (Images.Count > 0)
+        //     {
+        //         var imageResponse = await createProductService.UploadImages(Images);
+        //         if (!imageResponse.IsSuccess)
+        //         {
+        //             await Application.Current!.Windows[0].Page!.DisplayAlert("Error", "No se han podido subir las imágenes", "OK");
+        //             return;
+        //         }
+        //     }
+
+        //     await Application.Current!.Windows[0].Page!.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
+        // }
+        // else
+        // {
+        //     await Application.Current!.Windows[0].Page!.DisplayAlert("Error", "No se ha podido crear el producto", "OK");
+
+        // }
     }
 }

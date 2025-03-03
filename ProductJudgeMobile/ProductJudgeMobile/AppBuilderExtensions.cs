@@ -49,7 +49,7 @@ internal static class AppBuilderExtensions
             .AddHttpClient(HttpClients.FAKE_API, httpClient =>
             {
                 httpClient.BaseAddress = new Uri(HttpClients.URLS.URL_LOCAL_FAKE_API_BASE);
-                httpClient.Timeout = TimeSpan.FromSeconds(10);
+                httpClient.Timeout = TimeSpan.FromSeconds(60);
             })
 #if DEBUG
         .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
