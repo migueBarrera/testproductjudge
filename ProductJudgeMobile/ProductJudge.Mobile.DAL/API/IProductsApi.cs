@@ -5,12 +5,12 @@ namespace ProductJudge.Mobile.DAL.API;
 
 public interface IProductsApi
 {
-    [Post("/api/product/createWithImages")]
-[Multipart]
-Task<CreateProductResponseDto> CreateProductWithImages(
-    [AliasAs("Name")] string Name,
-    [AliasAs("Description")] string Description,
-    [AliasAs("Images")] IEnumerable<StreamPart> images);
+    [Post("/api/product/create")]
+    [Multipart]
+    Task<CreateProductResponseDto> CreateProductWithImages(
+        [AliasAs("Name")] string Name,
+        [AliasAs("Description")] string Description,
+        [AliasAs("Images")] IEnumerable<StreamPart> images);
     
     // [Post("/api/product/create")]
     // Task<CreateProductResponseDto> CreateProduct(CreateProductRequestDto request);
