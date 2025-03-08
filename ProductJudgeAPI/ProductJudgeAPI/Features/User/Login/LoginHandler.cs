@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using MongoDB.Driver;
+using ProductJudgeAPI.Exceptions;
 using ProductJudgeAPI.Extensions;
 
 namespace ProductJudgeAPI.Features.User.Login;
@@ -24,14 +26,11 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         var user = users
             .FirstOrDefault(u => u.Password == request.Password);
 
-        if (user == null)
-        {
-            throw new Exception("User not found.");
-        }
+        Ensure.That(user != null, ExceptionMessagesConstants.InvalidCredentials);
 
         return new LoginResponse()
         {
-            Email = user.Email,
+            Email = user!.Email,
             Token = jwtSecurityTokenService.BuildToken(),
             RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
         };

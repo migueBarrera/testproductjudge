@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using ProductJudge.Api.Models.Barcode;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.API;
-using ProductJudge.Mobile.DAL.Refit;
-using SecretAligner.Telemedicine.Mobile.Infrastructure;
+using ProductJudge.Mobile.DAL.Helpers;
 using System.Net.Http.Headers;
 
-namespace ProductJudgeMobile.Features.ScannerCheckProduct;
+namespace ProductJudge.Mobile.DAL.Services;
 
 public class BarcodeService
 {

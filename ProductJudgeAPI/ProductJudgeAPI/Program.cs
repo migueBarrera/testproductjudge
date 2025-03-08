@@ -7,6 +7,9 @@ using ProductJudgeAPI.Features.Product;
 using ProductJudgeAPI.Features.User;
 using Scalar.AspNetCore;
 using System.Reflection;
+using Hellang.Middleware.ProblemDetails;
+using Microsoft.AspNetCore.Mvc;
+using ProductJudgeAPI.Exceptions;
 
 namespace ProductJudgeAPI;
 
@@ -23,6 +26,36 @@ public class Program
         builder.Services.AddTransient<ProductService>();
         builder.Services.AddTransient<CategoryService>();
         builder.Services.AddTransient<JudgeService>();
+        builder.Services.AddProblemDetails(configure =>
+        {
+            configure.Map<ProductJudgeException>(ex => new ProblemDetails
+            {
+                Title = ex.Message,
+                Status = StatusCodes.Status400BadRequest,
+                Detail = ex.StackTrace
+            });
+        })
+        .Configure<ApiBehaviorOptions>(options =>
+                {
+                    options.InvalidModelStateResponseFactory = context =>
+                    {
+                        var problemDetails = new ValidationProblemDetails(context.ModelState)
+                        {
+                            Instance = context.HttpContext.Request.Path,
+                            Status = StatusCodes.Status400BadRequest,
+                            Type = "https://httpstatuses.com/400",
+                            Detail = "https://httpstatuses.com/400"
+                        };
+                        return new BadRequestObjectResult(problemDetails)
+                        {
+                            ContentTypes =
+                            {
+                                "application/problem+json",
+                                "application/problem+xml"
+                            }
+                        };
+                    };
+                });
         // Add services to the container.
 
         builder.Services.AddControllers();
@@ -33,6 +66,7 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseProblemDetails();
         // Configure the HTTP request pipeline.
         //if (app.Environment.IsDevelopment())
         //{

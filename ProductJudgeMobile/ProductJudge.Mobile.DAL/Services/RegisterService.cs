@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using ProductJudge.Api.Models.Auth;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.API;
-using ProductJudge.Mobile.DAL.Refit;
-using SecretAligner.Telemedicine.Mobile.Infrastructure;
+using ProductJudge.Mobile.DAL.Helpers;
 
-namespace ProductJudgeMobile.Features.Register;
+namespace ProductJudge.Mobile.DAL.Services;
 
 public class RegisterService
 {
@@ -19,7 +19,7 @@ public class RegisterService
         authApi = Refit.RestService.For<IAuthApi>(httpClient);
     }
 
-    internal async Task<ApiResultResponse> Register(string username,string email, string password)
+    public async Task<ApiResultResponse<RegisterResponseDto>> Register(string username,string email, string password)
     {
         try
         {
@@ -33,18 +33,18 @@ public class RegisterService
 
             if (response == null)
             {
-                return ApiResultResponse.CreateError("Invalid username or password");
+                return ApiResultResponse<RegisterResponseDto>.CreateError("Invalid username or password");
             }
 
             // Save token to secure storage
-            await SecureStorage.SetAsync("token", response.Token);
+            //todo await SecureStorage.SetAsync("token", response.Token);
 
-            return ApiResultResponse.CreateSuccess();
+            return ApiResultResponse<RegisterResponseDto>.CreateSuccess(response);
         }
         catch (Exception e)
         {
             logger.LogError(e, e.Message);
-            return ApiResultResponse.CreateError("Invalid username or password");
+            return ApiResultResponse<RegisterResponseDto>.CreateError("Invalid username or password");
         }
     }
 }

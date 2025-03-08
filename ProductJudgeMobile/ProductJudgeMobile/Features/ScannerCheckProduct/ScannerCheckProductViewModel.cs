@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using ProductJudge.Mobile.DAL.Services;
 using ProductJudgeMobile.Features.NewProduct;
 using ZXing.Net.Maui;
 

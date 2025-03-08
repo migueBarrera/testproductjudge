@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProductJudge.Mobile.DAL.Services;
 using ProductJudgeMobile.Features.Register;
 
 namespace ProductJudgeMobile.Features.Login;
@@ -12,8 +13,8 @@ public partial class LoginViewModel : ObservableObject
     {
         this.loginService = loginService;
 
-        Email = "test";
-        Password = "test";
+        Email = "test1@test.com";
+        Password = "test1";
     }
 
     [ObservableProperty]

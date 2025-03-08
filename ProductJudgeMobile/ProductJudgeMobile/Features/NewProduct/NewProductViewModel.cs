@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProductJudge.Mobile.DAL.Services;
 using System.Collections.ObjectModel;
 
 namespace ProductJudgeMobile.Features.NewProduct;
@@ -54,7 +55,9 @@ public partial class NewProductViewModel : ObservableObject
             return;
         }
 
-        var apiResponse = await createProductService.CreateProductWithImages(ProductName, ProductDescription, Images);
+
+        var list = await ImageHelper.ConvertImagesToStreamParts(Images);
+        var apiResponse = await createProductService.CreateProductWithImages(ProductName, ProductDescription, list);
         if (apiResponse.IsSuccess){
             await Application.Current!.Windows[0].Page!.DisplayAlert("Éxito", "El producto ha sido creado exitosamente.", "OK");
         } else {

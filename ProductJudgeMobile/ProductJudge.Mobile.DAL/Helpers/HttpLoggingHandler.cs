@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Net.Http.Headers;
 
-namespace ProductJudge.Mobile.DAL.Refit;
+namespace ProductJudge.Mobile.DAL.Helpers;
 
 public class HttpLoggingHandler : DelegatingHandler
 {

@@ -7,4 +7,6 @@ public class CreateProductResponseDto
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;
+
+    public IEnumerable<string> Images = new List<string>();
 }

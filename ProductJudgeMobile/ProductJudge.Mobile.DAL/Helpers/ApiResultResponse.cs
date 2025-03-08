@@ -1,4 +1,4 @@
-﻿namespace ProductJudge.Mobile.DAL.Refit;
+﻿namespace ProductJudge.Mobile.DAL.Helpers;
 
 public class ApiResultResponse<T> : ApiResultResponse where T : class
 {

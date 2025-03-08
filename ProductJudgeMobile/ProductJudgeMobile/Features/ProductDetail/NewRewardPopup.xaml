@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="ProductJudgeMobile.Features.ProductDetail.NewRewardPopup"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:local="clr-namespace:ProductJudgeMobile.Features.ProductDetail"
+               Color="Transparent"
+               x:DataType="local:NewRewardPopupViewModel">
+    <Border
+        Style="{StaticResource StandarBorderStyle}">
+        <VerticalStackLayout Margin="16">
+            <Label
+                Text="Deja tu opinión"
+                Style="{StaticResource BodyXLSemiBoldStyle}"
+                VerticalOptions="Center"
+                Margin="0,0,0,16"
+                HorizontalOptions="Center"/>
+
+            <Label
+                Text="Opinion"
+                Margin="4,16,0,0"
+                HorizontalTextAlignment="Start"
+                Style="{StaticResource BodyMRegularStyle}"/>
+            <Border
+                Style="{StaticResource StandarBorderStyle}">
+                <Editor
+                    Text="{Binding Password}"
+                    Style="{StaticResource EditorStyle}"/>
+            </Border >
+
+            <Button
+                Margin="0,16,0,0"
+                Text="Guardar"
+                Command="{Binding RegisterCommand}"
+                Style="{StaticResource PrimaryButtonStyle}"/>
+            <Button
+                Margin="0,16,0,0"
+                Text="Cerrar"
+                Command="{Binding RegisterCommand}"
+                Style="{StaticResource SecondaryButtonStyle}"/>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

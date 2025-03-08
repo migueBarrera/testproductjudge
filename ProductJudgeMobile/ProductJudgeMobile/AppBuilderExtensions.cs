@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using ProductJudge.Mobile.DAL.Refit;
+using ProductJudge.Mobile.DAL;
+using ProductJudge.Mobile.DAL.Helpers;
+using ProductJudge.Mobile.DAL.Services;
 using ProductJudgeMobile.Features.ListProducts;
 using ProductJudgeMobile.Features.Login;
 using ProductJudgeMobile.Features.MainPage;
@@ -7,7 +9,9 @@ using ProductJudgeMobile.Features.NewProduct;
 using ProductJudgeMobile.Features.ProductDetail;
 using ProductJudgeMobile.Features.Register;
 using ProductJudgeMobile.Features.ScannerCheckProduct;
-using SecretAligner.Telemedicine.Mobile.Infrastructure;
+using CommunityToolkit.Maui;
+
+
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
@@ -39,6 +43,9 @@ internal static class AppBuilderExtensions
         builder.Services.AddTransient<ProductDetailService>();
         builder.Services.AddTransient<BarcodeService>();
         builder.Services.AddTransient<CreateProductService>();
+        builder.Services.AddTransient<RewardProductService>();
+
+        builder.Services.AddTransientPopup<NewRewardPopup, NewRewardPopupViewModel>();
 
         return builder;
     }

@@ -5,5 +5,5 @@ namespace ProductJudgeAPI.Features.Product.CreateProduct;
 
 public class CreateProductRequest : CreateProductRequestDto , IRequest<CreateProductResponse>
 {
-    public IFormFileCollection Images { get; set; }
+    public IFormFileCollection Images { get; set; } = new FormFileCollection();
 }

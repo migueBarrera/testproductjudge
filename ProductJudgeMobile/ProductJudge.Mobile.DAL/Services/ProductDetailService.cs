@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using ProductJudge.Api.Models.Auth;
 using ProductJudge.Api.Models.Products;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.API;
-using ProductJudge.Mobile.DAL.Refit;
-using SecretAligner.Telemedicine.Mobile.Infrastructure;
-using System.Net.Http.Headers;
+using ProductJudge.Mobile.DAL.Helpers;
 
-namespace ProductJudgeMobile.Features.ProductDetail;
+namespace ProductJudge.Mobile.DAL.Services;
 
 public class ProductDetailService
 {

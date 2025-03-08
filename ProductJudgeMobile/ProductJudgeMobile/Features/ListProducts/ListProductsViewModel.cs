@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ProductJudge.Api.Models.Products;
+using ProductJudge.Mobile.DAL.Services;
 using ProductJudgeMobile.Features.ProductDetail;
 using ProductJudgeMobile.Infrastructure;
 

@@ -1,12 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using ProductJudge.Api.Models.Products;
 using ProductJudge.Mobile.DAL.API;
-using ProductJudge.Mobile.DAL.Refit;
+using ProductJudge.Mobile.DAL.Helpers;
 using Refit;
-using SecretAligner.Telemedicine.Mobile.Infrastructure;
 
-namespace ProductJudgeMobile.Features.NewProduct;
+namespace ProductJudge.Mobile.DAL.Services;
 
 public class CreateProductService
 {
@@ -22,7 +20,7 @@ public class CreateProductService
 
     }
 
-        internal async Task<ApiResultResponse> CreateProductWithImages(string name, string description,IEnumerable<ImageSource> images)
+    public async Task<ApiResultResponse> CreateProductWithImages(string name, string description, IEnumerable<StreamPart> images)
     {
         try
         {
@@ -31,9 +29,7 @@ public class CreateProductService
                 Name = name,
                 Description = description
             };
-
-            var list = await ImageHelper.ConvertImagesToStreamParts(images);
-            var response = await productApi.CreateProductWithImages(request.Name, request.Description, list);
+            var response = await productApi.CreateProductWithImages(request.Name, request.Description, images);
 
             return ApiResultResponse.CreateSuccess();
         }

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using ProductJudge.Api.Models.Products;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.API;
-using SecretAligner.Telemedicine.Mobile.Infrastructure;
 using System.Net.Http.Headers;
 
-namespace ProductJudgeMobile.Features.ListProducts;
+namespace ProductJudge.Mobile.DAL.Services;
 
 public class ListProductsService
 {
@@ -20,7 +20,7 @@ public class ListProductsService
         productApi = Refit.RestService.For<IProductsApi>(httpClient);
     }
 
-    internal async Task<IEnumerable<GetAllProductResponseDto>> GetProducts()
+    public async Task<IEnumerable<GetAllProductResponseDto>> GetProducts()
     {
         try
         {

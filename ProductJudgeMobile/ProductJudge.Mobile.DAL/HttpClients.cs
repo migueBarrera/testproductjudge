@@ -1,4 +1,4 @@
-﻿namespace SecretAligner.Telemedicine.Mobile.Infrastructure;
+﻿namespace ProductJudge.Mobile.DAL;
 
 public static class HttpClients
 {
@@ -6,7 +6,9 @@ public static class HttpClients
 
     public static class URLS
     {
-        public static string URL_LOCAL_FAKE_API_BASE = "https://productjudgetest2-c8dxgabzaxgvh6ab.francecentral-01.azurewebsites.net";
+        public static string URL_LOCAL_FAKE_API_BASE =
+        //"http://localhost:5186"; 
+        "https://productjudgetest2-c8dxgabzaxgvh6ab.francecentral-01.azurewebsites.net";
     }
 
     public static class Endpoints

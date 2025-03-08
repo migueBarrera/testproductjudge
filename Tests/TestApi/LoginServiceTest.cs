@@ -1,0 +1,37 @@
+using Microsoft.Extensions.Logging;
+using Moq;
+using ProductJudge.Mobile.DAL.Services;
+
+namespace TestApi;
+
+[TestClass]
+public class LoginServiceTest
+{
+    private Mock<ILogger<LoginService>> mockLogger;
+    private LoginService loginService;
+
+    [TestInitialize]
+    public void Setup()
+    {
+        mockLogger = new Mock<ILogger<LoginService>>();
+        
+        loginService = new LoginService(mockLogger.Object, HttpClientHelper.CreateHttpClientFactory().Object);
+    }
+
+    [TestMethod]
+    public async Task Login_ValidCredentials_ReturnsSuccess()
+    {
+        var result = await loginService.Login(UserCredentials.ValidEmail, UserCredentials.ValidPassword);
+
+        Assert.IsTrue(result.IsSuccess);
+        Assert.IsNotNull(result.Value);
+    }
+
+    [TestMethod]
+    public async Task Login_InvalidCredentials_ReturnsError()
+    {
+        var result = await loginService.Login(UserCredentials.InvalidEmail, UserCredentials.InvalidPassword);
+
+        Assert.IsFalse(result.IsSuccess);
+    }
+}
