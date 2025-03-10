@@ -18,14 +18,15 @@ public class JudgeProductService
         productApi = Refit.RestService.For<IProductsApi>(httpClient);
     }
 
-    public async Task<ApiResultResponse> AddOpinion(string judge, string productId)
+    public async Task<ApiResultResponse> AddJudge(string judge, string productId, string userId)
     {
         try
         {
             var request = new CreateJudgeRequestDto
             {
                 ProductId = productId,
-                Judge = judge
+                Judge = judge,
+                UserId = userId
             };
 
             var response = await productApi.AddJudge(request);

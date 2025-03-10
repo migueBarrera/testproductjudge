@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using ProductJudge.Api.Models.Products;
 
-namespace ProductJudgeAPI.Features.Product.GetProductByCategoryId;
+namespace ProductJudgeAPI.Features.Product.GetProductById;
 
-public class GetProductByIdRequest : IRequest<IEnumerable<GetProductByIdResponse>>
+public class GetProductByIdRequest : GetProductByIdRequestDto, IRequest<GetProductByIdResponse>
 {
-    public int CategoryId { get; set; }
+
 }

@@ -1,8 +1,10 @@
 ﻿using MediatR;
+using MongoDB.Driver;
+using ProductJudgeAPI.Features.Product.GetProductById;
 
 namespace ProductJudgeAPI.Features.Product.GetProductByCategoryId;
 
-public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, IEnumerable<GetProductByIdResponse>>
+public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, GetProductByIdResponse>
 {
     private readonly ProductService applicationDbContext;
 
@@ -11,18 +13,19 @@ public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, IEnu
         this.applicationDbContext = applicationDbContext;
     }
 
-    public async Task<IEnumerable<GetProductByIdResponse>> Handle(GetProductByIdRequest request, CancellationToken cancellationToken)
+    public async Task<GetProductByIdResponse> Handle(GetProductByIdRequest request, CancellationToken cancellationToken)
     {
 
-        //var filter = Builders<Entities.Product>.Filter.Eq(u => u.CategoryId, request.CategoryId);
-        var items = await applicationDbContext.GetAsync();
+        var filter = Builders<Entities.Product>.Filter.Eq(u => u.Id, request.Id);
+        var items = await applicationDbContext.GetAsync(filter);
 
-        return items.Select(x => new GetProductByIdResponse()
+        var item = items.FirstOrDefault();
+        return new GetProductByIdResponse()
         {
-            Id = x.Id,
-            Name = x.Name,
-            CategoryId = x.CategoryId,
-            Description = x.Description,
-        });
+            Id = item.Id,
+            Name = item.Name,
+            CategoryId = item.CategoryId,
+            Description = item.Description,
+        };
     }
 }

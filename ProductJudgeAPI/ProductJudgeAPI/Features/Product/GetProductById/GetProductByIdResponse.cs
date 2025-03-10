@@ -1,8 +1,8 @@
 ﻿using ProductJudge.Api.Models.Products;
 
-namespace ProductJudgeAPI.Features.Product.GetProductByCategoryId;
+namespace ProductJudgeAPI.Features.Product.GetProductById;
 
-public class GetProductByIdResponse : GetProductByResponseDto
+public class GetProductByIdResponse : GetProductByIdResponseDto
 {
 
 }

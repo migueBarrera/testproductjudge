@@ -1,6 +1,6 @@
 ﻿namespace ProductJudge.Api.Models.Products;
 
-public class GetProductByResponseDto
+public class GetProductByIdResponseDto
 
 {
     public string Id { get; set; } = string.Empty;

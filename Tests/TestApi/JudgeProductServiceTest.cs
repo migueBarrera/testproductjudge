@@ -25,8 +25,9 @@ public class JudgeProductServiceTest
     {
         var reward = "Gold Star";
         var productId = "12345";
+        var userId = "67890";
 
-        var result = await JudgeProductService.AddOpinion(reward, productId);
+        var result = await JudgeProductService.AddJudge(reward, productId, userId);
 
         Assert.IsTrue(result.IsSuccess);
     }
