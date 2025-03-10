@@ -12,8 +12,8 @@ public interface IProductsApi
         [AliasAs("Description")] string Description,
         [AliasAs("Images")] IEnumerable<StreamPart> images);
     
-    [Post("/api/product/reward")]
-    Task<AddRewardResponseDto> AddReward(AddRewardRequestDto request);
+    [Post("/api/judge")]
+    Task<CreateJudgeResponseDto> AddJudge(CreateJudgeRequestDto request);
 
     [Get("/api/product/{id}")]
     Task<GetProductByResponseDto> GetProductDetail([AliasAs("id")] string productId);

@@ -15,17 +15,19 @@ public class CreateJudgeHandler : IRequestHandler<CreateJudgeRequest, CreateJudg
     {
         var judge = new Entities.Judge()
         {
-            Text = request.Text,
+            Text = request.Judge,
             ProductId = request.ProductId,
             UserId = request.UserId,
+            CreatedAt = DateTime.UtcNow,
         };
 
         await applicationDbContext.CreateAsync(judge);
 
         return new CreateJudgeResponse()
         {
+            Id = judge.Id!,
             UserId = request.UserId,
-            Text = request.Text,
+            Judge = request.Judge,
             ProductId = request.ProductId,
         };
     }

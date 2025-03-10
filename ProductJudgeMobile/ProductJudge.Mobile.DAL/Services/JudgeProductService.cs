@@ -5,12 +5,12 @@ using ProductJudge.Mobile.DAL.Helpers;
 
 namespace ProductJudge.Mobile.DAL.Services;
 
-public class RewardProductService
+public class JudgeProductService
 {
     private readonly IProductsApi productApi;
-    private readonly ILogger<RewardProductService> logger;
+    private readonly ILogger<JudgeProductService> logger;
 
-    public RewardProductService(ILogger<RewardProductService> logger, IHttpClientFactory httpClientFactory)
+    public JudgeProductService(ILogger<JudgeProductService> logger, IHttpClientFactory httpClientFactory)
     {
         this.logger = logger;
 
@@ -18,17 +18,17 @@ public class RewardProductService
         productApi = Refit.RestService.For<IProductsApi>(httpClient);
     }
 
-    public async Task<ApiResultResponse> AddOpinion(string reward, string productId)
+    public async Task<ApiResultResponse> AddOpinion(string judge, string productId)
     {
         try
         {
-            var request = new AddRewardRequestDto
+            var request = new CreateJudgeRequestDto
             {
                 ProductId = productId,
-                Reward = reward
+                Judge = judge
             };
 
-            var response = await productApi.AddReward(request);
+            var response = await productApi.AddJudge(request);
 
             return ApiResultResponse.CreateSuccess();
         }

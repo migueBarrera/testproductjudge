@@ -12,7 +12,7 @@ public partial class NewRewardPopupViewModel : CoreViewModel
     private readonly IPopupService popupService;
 
     [ObservableProperty]
-    private partial string RewardName { get; set; }
+    private partial string RewardName { get; set; } = string.Empty;
 
     public NewRewardPopupViewModel(RewardProductService rewardProductService, IPopupService popupService)
     {

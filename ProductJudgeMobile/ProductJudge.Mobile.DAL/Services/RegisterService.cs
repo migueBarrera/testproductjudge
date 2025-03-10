@@ -36,9 +36,6 @@ public class RegisterService
                 return ApiResultResponse<RegisterResponseDto>.CreateError("Invalid username or password");
             }
 
-            // Save token to secure storage
-            //todo await SecureStorage.SetAsync("token", response.Token);
-
             return ApiResultResponse<RegisterResponseDto>.CreateSuccess(response);
         }
         catch (Exception e)

@@ -7,6 +7,7 @@ namespace ProductJudgeAPI.Controllers;
 
 [Route($"{ApiConstants.Endpoints.ApiBase}/{ApiConstants.Endpoints.Judge}")]
 [ControllerName(ApiConstants.Controllers.Judge)]
+[ApiController]
 public class JudgeController : ControllerBase
 {
     private readonly IMediator _mediator;

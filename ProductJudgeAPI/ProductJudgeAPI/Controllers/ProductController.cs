@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProductJudgeAPI.Features.Product.AddReward;
 using ProductJudgeAPI.Features.Product.CreateProduct;
 using ProductJudgeAPI.Features.Product.GetAllProducts;
 using ProductJudgeAPI.Features.Product.GetProductByCategoryId;
@@ -22,7 +23,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<IEnumerable<GetProductByIdResponse>>> GetByCategoryId(int id,CancellationToken cancellationToken = default)
+    public async Task<ActionResult<IEnumerable<GetProductByIdResponse>>> GetByCategoryId(int id, CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(new GetProductByIdRequest(), cancellationToken);
         return Ok(response);

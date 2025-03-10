@@ -38,6 +38,7 @@ public partial class RegisterViewModel : ObservableObject
         var response = await registerService.Register(UserName,Email, Password);
         if (response.IsSuccess)
         {
+            await SecureStorage.SetAsync("token", response.Value!.Token);
             await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
         }
         else

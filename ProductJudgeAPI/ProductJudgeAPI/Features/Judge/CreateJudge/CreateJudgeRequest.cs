@@ -1,12 +1,9 @@
 ﻿using MediatR;
+using ProductJudge.Api.Models.Products;
 
 namespace ProductJudgeAPI.Features.Judge.CreateJudge;
 
-public class CreateJudgeRequest : IRequest<CreateJudgeResponse>
+public class CreateJudgeRequest : CreateJudgeRequestDto, IRequest<CreateJudgeResponse>
 {
-    public string Text = string.Empty;
 
-    public string UserId { get; set; } = string.Empty;
-
-    public string ProductId { get; set; } = string.Empty;
 }
