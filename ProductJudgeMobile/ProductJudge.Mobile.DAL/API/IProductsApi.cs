@@ -16,7 +16,7 @@ public interface IProductsApi
     Task<CreateJudgeResponseDto> AddJudge(CreateJudgeRequestDto request);
 
     [Get("/api/product/{id}")]
-    Task<GetProductByResponseDto> GetProductDetail([AliasAs("id")] string productId);
+    Task<GetProductByIdResponseDto> GetProductDetail([AliasAs("id")] string productId);
 
     [Get("/api/product")]
     Task<IEnumerable<GetAllProductResponseDto>> GetAll(GetAllProductsRequestDto request);

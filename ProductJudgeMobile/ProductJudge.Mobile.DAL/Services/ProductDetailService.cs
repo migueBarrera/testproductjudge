@@ -19,7 +19,7 @@ public class ProductDetailService
         productApi = Refit.RestService.For<IProductsApi>(httpClient);
     }
 
-    internal async Task<ApiResultResponse<GetProductByResponseDto>> GetProduct(string id)
+    internal async Task<ApiResultResponse<GetProductByIdResponseDto>> GetProduct(string id)
     {
         try
         {
@@ -27,15 +27,15 @@ public class ProductDetailService
 
             if (response == null)
             {
-                return ApiResultResponse<GetProductByResponseDto>.CreateError("Error");
+                return ApiResultResponse<GetProductByIdResponseDto>.CreateError("Error");
             }
 
-            return ApiResultResponse<GetProductByResponseDto>.CreateSuccess(response);
+            return ApiResultResponse<GetProductByIdResponseDto>.CreateSuccess(response);
         }
         catch (Exception e)
         {
             logger.LogError(e, e.Message);
-            return ApiResultResponse<GetProductByResponseDto>.CreateError("Invalid username or password");
+            return ApiResultResponse<GetProductByIdResponseDto>.CreateError("Invalid username or password");
         }
     }
 }

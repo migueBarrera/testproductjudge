@@ -3,7 +3,7 @@ using Moq;
 using ProductJudge.Mobile.DAL.Services;
 using TestApi;
 
-namespace Company.TestProject1;
+namespace TestApi;
 
 [TestClass]
 public class JudgeProductServiceTest
