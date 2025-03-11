@@ -22,10 +22,10 @@ public class ProductController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<IEnumerable<GetProductByIdResponse>>> GetByCategoryId(int id, CancellationToken cancellationToken = default)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<IEnumerable<GetProductByIdResponse>>> GetByCategoryId(string id, CancellationToken cancellationToken = default)
     {
-        var response = await _mediator.Send(new GetProductByIdRequest(), cancellationToken);
+        var response = await _mediator.Send(new GetProductByIdRequest(){Id = id}, cancellationToken);
         return Ok(response);
     }
 

@@ -19,7 +19,7 @@ public class ProductDetailService
         productApi = Refit.RestService.For<IProductsApi>(httpClient);
     }
 
-    internal async Task<ApiResultResponse<GetProductByIdResponseDto>> GetProduct(string id)
+    public async Task<ApiResultResponse<GetProductByIdResponseDto>> GetProduct(string id)
     {
         try
         {

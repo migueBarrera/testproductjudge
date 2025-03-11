@@ -8,7 +8,7 @@ public class CreateJudgeResponseDto
 
     public DateTime CreatedAt { get; set; } = DateTime.MinValue;
 
-        public string UserId { get; set; } = string.Empty;
+    public string UserId { get; set; } = string.Empty;
 
     public string ProductId { get; set; } = string.Empty;
 }

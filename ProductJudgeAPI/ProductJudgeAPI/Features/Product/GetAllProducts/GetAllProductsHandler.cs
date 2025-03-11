@@ -15,13 +15,13 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProductsRequest, IEnu
     {
         var items = await applicationDbContext.GetAsync();
 
-        return items.Select(x => new GetAllProductsResponse()
+        return items?.Select(x => new GetAllProductsResponse()
         {
-            Id = x.Id,
+            Id = x.Id!,
             Name = x.Name,
             Image = x.Image,
             Description = x.Description,
             CategoryId = x.CategoryId,
-        });
+        }) ?? new List<GetAllProductsResponse>();
     }
 }

@@ -10,4 +10,6 @@ public class GetProductByIdResponseDto
     public string Description { get; set; } = string.Empty;
 
     public string CategoryId { get; set; } = string.Empty;
+
+    public IEnumerable<CreateJudgeResponseDto> Judges { get; set; } = new List<CreateJudgeResponseDto>();
 }
