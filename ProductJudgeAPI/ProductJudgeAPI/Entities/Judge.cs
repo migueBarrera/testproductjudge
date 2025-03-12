@@ -11,8 +11,10 @@ public class Judge
 
     public string Text { get; set; } = string.Empty;
 
+    [BsonRepresentation(BsonType.ObjectId)] 
     public string UserId { get; set; } = string.Empty;
 
+    [BsonRepresentation(BsonType.ObjectId)] 
     public string ProductId { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; } = DateTime.MinValue;

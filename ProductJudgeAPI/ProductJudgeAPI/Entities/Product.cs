@@ -15,8 +15,6 @@ public class Product
 
     public ICollection<string> Image { get; set; } = new List<string>();
 
-    public ICollection<Judge> Judges { get; set; } = new List<Judge>();
-
     public IEnumerable<Barcode> Barcodes { get; set; } = new List<Barcode>();
 
     public string CategoryId { get; set; } = string.Empty;

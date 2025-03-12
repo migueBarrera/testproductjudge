@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductJudgeAPI.Features.Judge.CreateJudge;
 
@@ -21,6 +22,7 @@ public class JudgeController : ControllerBase
 
 
     [HttpPost(Name = "AddJudge")]
+    //[Authorize]
     [ProducesResponseType(typeof(CreateJudgeResponse), StatusCodes.Status201Created)]
     public async Task<IActionResult> Add(CreateJudgeRequest request, CancellationToken cancellationToken = default)
     {

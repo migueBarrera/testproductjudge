@@ -11,6 +11,7 @@ public class Barcode
 
     public string Value { get; set; } = string.Empty;
 
+    [BsonRepresentation(BsonType.ObjectId)]
     public string ProductId { get; set; } = string.Empty;
 
     public Product? Product { get; set; }
