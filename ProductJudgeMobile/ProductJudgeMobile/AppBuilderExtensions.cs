@@ -43,7 +43,7 @@ internal static class AppBuilderExtensions
         builder.Services.AddTransient<ProductDetailService>();
         builder.Services.AddTransient<BarcodeService>();
         builder.Services.AddTransient<CreateProductService>();
-        builder.Services.AddTransient<RewardProductService>();
+        builder.Services.AddTransient<JudgeProductService>();
 
         builder.Services.AddTransientPopup<NewRewardPopup, NewRewardPopupViewModel>();
 
