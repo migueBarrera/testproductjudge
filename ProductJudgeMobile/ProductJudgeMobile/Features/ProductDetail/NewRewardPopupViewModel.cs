@@ -8,15 +8,15 @@ namespace ProductJudgeMobile.Features.ProductDetail;
 
 public partial class NewRewardPopupViewModel : CoreViewModel
 {
-    private readonly RewardProductService rewardProductService;
+    private readonly JudgeProductService judgeProductService;
     private readonly IPopupService popupService;
 
     [ObservableProperty]
     private partial string RewardName { get; set; } = string.Empty;
 
-    public NewRewardPopupViewModel(RewardProductService rewardProductService, IPopupService popupService)
+    public NewRewardPopupViewModel(JudgeProductService judgeProductService, IPopupService popupService)
     {
-        this.rewardProductService = rewardProductService;
+        this.judgeProductService = judgeProductService;
         this.popupService = popupService;
     }
 
@@ -29,7 +29,7 @@ public partial class NewRewardPopupViewModel : CoreViewModel
             return;
         }
 
-        await rewardProductService.AddOpinion(RewardName, "todo");
+        await judgeProductService.AddJudge(RewardName, "todo", "todo");
         await popupService.ClosePopupAsync();
     }
 }
