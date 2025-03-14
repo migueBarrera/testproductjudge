@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.Services;
 
 namespace ProductJudgeMobile.Features.Register;
@@ -12,9 +13,9 @@ public partial class RegisterViewModel : ObservableObject
     {
         this.registerService = registerService;
 
-        UserName = "test1";
-        Email = "test1@test.com";
-        Password = "test1";
+        UserName = TestDALConstants.TEST_USER;
+        Email = TestDALConstants.TEST_EMAIL;
+        Password = TestDALConstants.TEST_PASSWORD;
     }
 
     [ObservableProperty]

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using ProductJudge.Api.Models.Products;
-using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.API;
 using System.Net.Http.Headers;
 

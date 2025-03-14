@@ -1,5 +1,3 @@
-using System;
-
 namespace ProductJudge.Api.Models.Products;
 
 public class CreateJudgeRequestDto

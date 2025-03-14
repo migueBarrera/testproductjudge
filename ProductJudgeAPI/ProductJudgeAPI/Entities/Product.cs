@@ -13,11 +13,4 @@ public class Product
 
     public string Description { get; set; } = string.Empty;
 
-    public ICollection<string> Image { get; set; } = new List<string>();
-
-    public IEnumerable<Barcode> Barcodes { get; set; } = new List<Barcode>();
-
-    public string CategoryId { get; set; } = string.Empty;
-    public Category? Category { get; set; }
-
 }

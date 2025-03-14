@@ -28,6 +28,10 @@ public class JudgeProductServiceTest
     {
         
         var resultLogin = await loginService.Login(UserCredentials.ValidEmail, UserCredentials.ValidPassword);
+        if (resultLogin.IsError)
+        {
+            Assert.Fail("Login failed");
+        }
 
         var httpClientFactory = HttpClientHelper.CreateHttpClientFactory(resultLogin.Value!.Token);
         var JudgeProductService = new JudgeProductService(mockLogger.Object, httpClientFactory.Object);
