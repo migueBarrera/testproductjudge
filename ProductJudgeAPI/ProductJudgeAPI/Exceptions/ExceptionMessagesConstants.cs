@@ -14,6 +14,9 @@ namespace ProductJudgeAPI.Exceptions
         public static readonly ExceptionMessagesConstants InvalidCredentials = new("404", InvalidCredentialsMessage);
         public const string InvalidCredentialsMessage = "Credenciales incorrectos";
 
+        public static readonly ExceptionMessagesConstants EmailRegistered = new("404", EmailRegisteredMessage);
+        public const string EmailRegisteredMessage = "Ese correo ya esta registrado en el sistema.";
+
         private ExceptionMessagesConstants(string code)
         {
             Code = code;

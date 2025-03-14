@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MongoDB.Driver;
+using ProductJudgeAPI.Exceptions;
 using ProductJudgeAPI.Extensions;
 
 namespace ProductJudgeAPI.Features.User.Register;
@@ -21,10 +22,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
         var users = await applicationDbContext
             .GetAsync(filter);
 
-        if (users.Any())
-        {
-            throw new Exception("User register.");
-        }
+        Ensure.That(users != null && !users.Any(), ExceptionMessagesConstants.EmailRegistered);
 
         var newUser = new Entities.User()
         {

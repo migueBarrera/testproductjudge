@@ -23,7 +23,6 @@ public class RegisterService
     {
         try
         {
-            logger.LogError("test");
             var response = await authApi.Register(new RegisterRequestDto
             {
                 Email = email,

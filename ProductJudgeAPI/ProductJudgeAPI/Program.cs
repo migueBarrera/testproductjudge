@@ -10,6 +10,11 @@ using System.Reflection;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Mvc;
 using ProductJudgeAPI.Exceptions;
+using MediatR;
+using ProductJudgeAPI.Infrastructure;
+using FluentValidation;
+using ProductJudgeAPI.Features.User.Register;
+using ProductJudgeAPI.Features.User.Login;
 
 namespace ProductJudgeAPI;
 
@@ -28,12 +33,8 @@ public class Program
         builder.Services.AddTransient<JudgeService>();
         builder.Services.AddProblemDetails(configure =>
         {
-            configure.Map<ProductJudgeException>(ex => new ProblemDetails
-            {
-                Title = ex.Message,
-                Status = StatusCodes.Status400BadRequest,
-                Detail = ex.StackTrace
-            });
+            configure.Map<ValidationException>(ConfigureExceptionProblemDetails);
+            configure.Map<ProductJudgeException>(ConfigureExceptionProblemDetails);
         })
         .Configure<ApiBehaviorOptions>(options =>
                 {
@@ -63,7 +64,9 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddTokenAuthentication(builder.Configuration);
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
+        builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        builder.Services.AddScoped<IValidator<RegisterRequest>, RegisterValidator>();
+        builder.Services.AddScoped<IValidator<LoginRequest>, LoginRequestValidator>();
         var app = builder.Build();
 
         app.UseProblemDetails();
@@ -83,4 +86,14 @@ public class Program
 
         app.Run();
     }
+
+            private static ProblemDetails? ConfigureExceptionProblemDetails(Exception exception)
+        {
+            return new ProblemDetails()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type =  "https://httpstatuses.com/400",
+                Detail = exception.Message
+            };
+        }
 }

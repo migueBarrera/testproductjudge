@@ -28,9 +28,9 @@ public class LoginServiceTest
     }
 
     [TestMethod]
-    public async Task Login_InvalidCredentials_ReturnsError()
+    public async Task Login_EmptyCredentials_ReturnsError()
     {
-        var result = await loginService.Login(UserCredentials.InvalidEmail, UserCredentials.InvalidPassword);
+        var result = await loginService.Login(string.Empty, string.Empty);
 
         Assert.IsFalse(result.IsSuccess);
     }
