@@ -13,4 +13,6 @@ public class Product
 
     public string Description { get; set; } = string.Empty;
 
+    public ICollection<string> Image { get; set; } = new List<string>();
+
 }

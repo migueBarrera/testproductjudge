@@ -21,7 +21,6 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProductsRequest, IEnu
             Name = x.Name,
             Image = x.Image,
             Description = x.Description,
-            CategoryId = x.CategoryId,
         }) ?? new List<GetAllProductsResponse>();
     }
 }

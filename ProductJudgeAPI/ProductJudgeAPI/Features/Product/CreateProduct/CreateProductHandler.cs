@@ -35,14 +35,14 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
                 {
                     product.Image.Add(imageUrl);
 
-                    await applicationDbContext.UpdateAsync(product.Id, product);
+                    await applicationDbContext.UpdateAsync(product.Id!, product);
                 }
             }
         }
 
         return new CreateProductResponse()
         {
-            Id = product.Id,
+            Id = product.Id!,
             Name = product.Name,
             Description = product.Description,
             Images = product.Image
