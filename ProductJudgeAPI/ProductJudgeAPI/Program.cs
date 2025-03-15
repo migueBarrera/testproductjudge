@@ -15,6 +15,7 @@ using ProductJudgeAPI.Infrastructure;
 using FluentValidation;
 using ProductJudgeAPI.Features.User.Register;
 using ProductJudgeAPI.Features.User.Login;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 
 namespace ProductJudgeAPI;
 
@@ -23,6 +24,8 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddOpenTelemetry().UseAzureMonitor();
 
         builder.Services.Configure<StoreDatabaseSettings>(
             builder.Configuration.GetSection("BookStoreDatabase"));
