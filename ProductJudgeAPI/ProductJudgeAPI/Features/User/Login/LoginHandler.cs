@@ -31,6 +31,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         return new LoginResponse()
         {
             Email = user!.Email,
+            Name = user!.Name,
             Token = jwtSecurityTokenService.BuildToken(),
             RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
         };

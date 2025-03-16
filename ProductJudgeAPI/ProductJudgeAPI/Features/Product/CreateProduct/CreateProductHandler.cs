@@ -8,12 +8,14 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
     private readonly ProductService applicationDbContext;
     private readonly BlobServiceClient _blobServiceClient;
     private readonly string _containerName = "product-images-test";
+    private readonly ILogger<CreateProductHandler> _logger;
 
-    public CreateProductHandler(ProductService applicationDbContext, IConfiguration configuration)
+    public CreateProductHandler(ProductService applicationDbContext, IConfiguration configuration, ILogger<CreateProductHandler> logger)
     {
         this.applicationDbContext = applicationDbContext;
         var connectionString = configuration.GetSection("BlobStorage").GetSection("ConnectionString").Value;
         _blobServiceClient = new BlobServiceClient(connectionString);
+        _logger = logger;
     }
 
     public async Task<CreateProductResponse> Handle(CreateProductRequest request, CancellationToken cancellationToken)
@@ -71,6 +73,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Error while uploading image to blob storage");
             return string.Empty;
         }
     }

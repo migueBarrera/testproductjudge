@@ -29,7 +29,6 @@ public class CheckProductByBarcodeHandler : IRequestHandler<CheckProductByBarcod
             };
         }
 
-        var filterPRoduct = Builders<Entities.Product>.Filter.Eq(b => b.Id, request.Barcode);
         var product = await productService
             .GetAsync(existBarcode.First().ProductId);
 
@@ -44,7 +43,7 @@ public class CheckProductByBarcodeHandler : IRequestHandler<CheckProductByBarcod
         return new CheckProductByBarcodeResponse()
         {
             ExistProduct = true,
-            ProductId = product.Id,
+            ProductId = product.Id!,
         };
     }
 }

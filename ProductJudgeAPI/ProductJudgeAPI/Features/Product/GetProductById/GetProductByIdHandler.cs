@@ -43,7 +43,7 @@ public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, GetP
                 CreatedAt = j.CreatedAt,
                 UserId = j.UserId,
                 ProductId = j.ProductId
-            }) ?? new List<CreateJudgeResponseDto>()
+            }) ?? []
         };
     }
 }

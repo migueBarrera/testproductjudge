@@ -36,6 +36,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
         return new RegisterResponse()
         {
             Email = newUser.Email,
+            Name = newUser.Name,
             Token = jwtSecurityTokenService.BuildToken(),
             RefreshToken = jwtSecurityTokenService.BuildRefreshToken(),
         };

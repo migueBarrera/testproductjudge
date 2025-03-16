@@ -15,10 +15,10 @@ public class GetCategoryHandler : IRequestHandler<GetCategoryRequest, IEnumerabl
     {
         var items = await applicationDbContext.GetAsync();
 
-        return items.Select(x => new GetCategoryResponse()
+        return items.Select(item => new GetCategoryResponse()
         {
-            Id = x.Id,
-            Name = x.Name,
+            Id = item.Id!,
+            Name = item.Name,
         });
     }
 }

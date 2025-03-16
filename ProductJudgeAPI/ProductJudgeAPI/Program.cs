@@ -16,6 +16,7 @@ using FluentValidation;
 using ProductJudgeAPI.Features.User.Register;
 using ProductJudgeAPI.Features.User.Login;
 using Azure.Monitor.OpenTelemetry.AspNetCore;
+using ProductJudgeAPI.Features.Product.CreateProduct;
 
 namespace ProductJudgeAPI;
 
@@ -70,6 +71,7 @@ public class Program
         builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         builder.Services.AddScoped<IValidator<RegisterRequest>, RegisterValidator>();
         builder.Services.AddScoped<IValidator<LoginRequest>, LoginRequestValidator>();
+        builder.Services.AddScoped<IValidator<CreateProductRequest>, CreateProductRequestValidator>();
         var app = builder.Build();
 
         app.UseProblemDetails();

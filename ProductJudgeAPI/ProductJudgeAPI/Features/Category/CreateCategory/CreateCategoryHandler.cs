@@ -22,7 +22,7 @@ public class CreateCategoryHandler : IRequestHandler<CreateCategoryRequest, Crea
 
         return new CreateCategoryResponse()
         {
-            Id = category.Id,
+            Id = category.Id!,
             Name = category.Name,
         };
     }
