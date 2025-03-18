@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace FreyaApi.Helpers;
+namespace ProductJudgeAPI.Extensions;
 
 public static class JwtSecurityTokenHelper
 {

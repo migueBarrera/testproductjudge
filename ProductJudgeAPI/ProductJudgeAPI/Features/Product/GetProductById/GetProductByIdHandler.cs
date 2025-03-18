@@ -35,6 +35,7 @@ public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, GetP
         {
             Id = item!.Id!,
             Name = item.Name,
+            Images = item.Image,
             Description = item.Description,
             Judges = itemsJudges?.Select(j => new CreateJudgeResponseDto()
             {

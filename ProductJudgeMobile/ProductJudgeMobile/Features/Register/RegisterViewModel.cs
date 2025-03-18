@@ -2,16 +2,21 @@
 using CommunityToolkit.Mvvm.Input;
 using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.Services;
+using ProductJudgeMobile.Infrastructure;
+using ProductJudgeMobile.Services;
 
 namespace ProductJudgeMobile.Features.Register;
 
 public partial class RegisterViewModel : ObservableObject
 {
     private readonly RegisterService registerService;
+    private readonly SesionServices sesionServices;
 
-    public RegisterViewModel(RegisterService registerService)
+    public RegisterViewModel(RegisterService registerService, SesionServices sesionServices)
     {
         this.registerService = registerService;
+        this.sesionServices = sesionServices;
+
 
         UserName = TestDALConstants.TEST_USER;
         Email = TestDALConstants.TEST_EMAIL;
@@ -39,8 +44,8 @@ public partial class RegisterViewModel : ObservableObject
         var response = await registerService.Register(UserName,Email, Password);
         if (response.IsSuccess)
         {
-            await SecureStorage.SetAsync("token", response.Value!.Token);
-            await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
+            await sesionServices.StoreSessionAsync(response.Value!.Token, response.Value!.RefreshToken);
+            await Shell.Current.GoToAsync($"///{PageRoutes.Home}");
         }
         else
         {

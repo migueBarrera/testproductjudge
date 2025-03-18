@@ -3,19 +3,23 @@ using CommunityToolkit.Mvvm.Input;
 using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.Services;
 using ProductJudgeMobile.Features.Register;
+using ProductJudgeMobile.Infrastructure;
+using ProductJudgeMobile.Services;
 
 namespace ProductJudgeMobile.Features.Login;
 
 public partial class LoginViewModel : ObservableObject
 {
     private readonly LoginService loginService;
+    private readonly SesionServices sesionServices;
 
-    public LoginViewModel(LoginService loginService)
+    public LoginViewModel(LoginService loginService, SesionServices sesionServices)
     {
         this.loginService = loginService;
 
         Email = TestDALConstants.TEST_EMAIL;
         Password = TestDALConstants.TEST_PASSWORD;
+        this.sesionServices = sesionServices;
     }
 
     [ObservableProperty]
@@ -36,8 +40,8 @@ public partial class LoginViewModel : ObservableObject
         var response = await loginService.Login(Email, Password);
         if (response.IsSuccess)
         {
-            await SecureStorage.SetAsync("token", response.Value!.Token);
-            await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+            await sesionServices.StoreSessionAsync(response.Value!.Token, response.Value!.RefreshToken);
+            await Shell.Current.GoToAsync($"///{PageRoutes.Home}");
         }
         else
         {

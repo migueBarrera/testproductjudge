@@ -12,6 +12,7 @@
     xmlns:listProducts="clr-namespace:ProductJudgeMobile.Features.ListProducts"
     xmlns:productDetail="clr-namespace:ProductJudgeMobile.Features.ProductDetail"
     xmlns:newProduct="clr-namespace:ProductJudgeMobile.Features.NewProduct"
+    xmlns:infra="clr-namespace:ProductJudgeMobile.Infrastructure"
     Title="ProductJudgeMobile">
 
     <!--<ShellContent
@@ -19,21 +20,29 @@
         ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />-->
     
     <ShellContent
-        Title="Login"
+        Route="{x:Static infra:PageRoutes.Login}"
         ContentTemplate="{DataTemplate login:LoginPage}" />
     
     <ShellContent
-        Title="Register"
+        Route="{x:Static infra:PageRoutes.Register}"
         ContentTemplate="{DataTemplate register:RegisterPage}" />
 
-    <ShellContent
-        Title="Main"
-        ContentTemplate="{DataTemplate main:MainPage}"/>
-
-    <!--<ShellContent
-        Title="ListProducts"
-        ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />-->
-
+    <TabBar
+        Route="{x:Static infra:PageRoutes.Home}">
+        <Tab
+            Title="Cats"
+            Icon="cat.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate main:MainPage}" />
+        </Tab>
+        <Tab
+            Title="Dogs"
+            Icon="dog.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate main:MainPage}" />
+        </Tab>
+    </TabBar>
+    
     <ShellContent
         Title="ProductDetail"
         ContentTemplate="{DataTemplate productDetail:ProductDetailPage}" />

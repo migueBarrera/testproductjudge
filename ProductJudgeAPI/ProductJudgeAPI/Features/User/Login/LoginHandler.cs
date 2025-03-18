@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using MongoDB.Driver;
 using ProductJudgeAPI.Exceptions;
 using ProductJudgeAPI.Extensions;
@@ -24,9 +23,10 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
             .GetAsync(filter);
 
         var user = users
-            .FirstOrDefault(u => u.Password == request.Password);
+            .FirstOrDefault();
 
         Ensure.That(user != null, ExceptionMessagesConstants.InvalidCredentials);
+        Ensure.That(Hash.Validate(request.Password, user!.Password), ExceptionMessagesConstants.InvalidCredentials);
 
         return new LoginResponse()
         {

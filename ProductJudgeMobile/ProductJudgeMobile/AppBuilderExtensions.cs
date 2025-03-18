@@ -10,6 +10,8 @@ using ProductJudgeMobile.Features.ProductDetail;
 using ProductJudgeMobile.Features.Register;
 using ProductJudgeMobile.Features.ScannerCheckProduct;
 using CommunityToolkit.Maui;
+using ProductJudgeMobile.Services;
+
 
 
 #if ANDROID
@@ -44,6 +46,7 @@ internal static class AppBuilderExtensions
         builder.Services.AddTransient<BarcodeService>();
         builder.Services.AddTransient<CreateProductService>();
         builder.Services.AddTransient<JudgeProductService>();
+        builder.Services.AddTransient<SesionServices>();
 
         builder.Services.AddTransientPopup<NewRewardPopup, NewRewardPopupViewModel>();
 

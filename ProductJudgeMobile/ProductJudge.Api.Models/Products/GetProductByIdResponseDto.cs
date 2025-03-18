@@ -11,5 +11,7 @@ public class GetProductByIdResponseDto
 
     public string CategoryId { get; set; } = string.Empty;
 
+    public IEnumerable<string> Images = new List<string>();
+
     public IEnumerable<CreateJudgeResponseDto> Judges { get; set; } = new List<CreateJudgeResponseDto>();
 }

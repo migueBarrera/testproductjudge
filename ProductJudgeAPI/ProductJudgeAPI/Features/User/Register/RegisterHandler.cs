@@ -28,7 +28,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
         {
             Email = request.Email,
             Name = request.Name,
-            Password = request.Password,
+            Password = Hash.Create(request.Password),
         };
 
         await applicationDbContext.CreateAsync(newUser);
