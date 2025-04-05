@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Moq;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.Services;
 using TestApi;
 
@@ -27,7 +28,7 @@ public class JudgeProductServiceTest
     public async Task AddOpinion_ValidData_ReturnsSuccess()
     {
         
-        var resultLogin = await loginService.Login(UserCredentials.ValidEmail, UserCredentials.ValidPassword);
+        var resultLogin = await loginService.Login(TestDALConstants.TEST_EMAIL, TestDALConstants.TEST_PASSWORD);
         if (resultLogin.IsError)
         {
             Assert.Fail("Login failed");

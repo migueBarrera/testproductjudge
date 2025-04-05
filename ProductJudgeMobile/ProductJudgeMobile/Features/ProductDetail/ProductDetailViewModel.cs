@@ -5,6 +5,8 @@ using ProductJudgeMobile.Features.ListProducts;
 using System.Collections.ObjectModel;
 using ProductJudgeMobile.Infrastructure;
 using CommunityToolkit.Maui.Core;
+using System.Threading.Tasks;
+using ProductJudge.Api.Models.Products;
 
 namespace ProductJudgeMobile.Features.ProductDetail;
 
@@ -18,7 +20,7 @@ public partial class ProductDetailViewModel : CoreViewModel, IQueryAttributable
     public partial ItemProduct? ProductCapsule { get; set; }
 
     [ObservableProperty]
-    public partial List<string> ProductImages { get; set; } = new List<string>();
+    public partial List<Uri> ProductImages { get; set; } = new List<Uri>();
 
     [ObservableProperty]
     public partial string ProductName { get; set; } = string.Empty;
@@ -27,7 +29,7 @@ public partial class ProductDetailViewModel : CoreViewModel, IQueryAttributable
     public partial string ProductDescription { get; set; } = string.Empty;
 
     [ObservableProperty]
-    private ObservableCollection<Review> productReviews = new ObservableCollection<Review>();
+    private ObservableCollection<CreateJudgeResponseDto> productReviews = new ObservableCollection<CreateJudgeResponseDto>();
 
     public ProductDetailViewModel(ProductDetailService productDetailService, IPopupService popupService)
     {
@@ -50,10 +52,22 @@ public partial class ProductDetailViewModel : CoreViewModel, IQueryAttributable
 
         if (ProductCapsule != null)
         {
-            ProductImages = ProductCapsule.Image.ToList();
+            ProductImages = ProductCapsule.Image.Select(image => new Uri(image)).ToList();
             ProductName = ProductCapsule.Name;
             ProductDescription = ProductCapsule.Description;
-            //ProductReviews = new ObservableCollection<Review>(ProductCapsule.Reviews);
+            _ = NewMethod();
+        }
+    }
+
+    private async Task NewMethod()
+    {
+        var response = await productDetailService.GetProduct(ProductCapsule!.Id);
+        if (response.IsSuccess)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                ProductReviews = new ObservableCollection<CreateJudgeResponseDto>(response.Value!.Judges);
+            });
         }
     }
 }

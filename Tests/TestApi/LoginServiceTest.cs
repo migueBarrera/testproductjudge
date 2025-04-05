@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Moq;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.Services;
 
 namespace TestApi;
@@ -21,7 +22,7 @@ public class LoginServiceTest
     [TestMethod]
     public async Task Login_ValidCredentials_ReturnsSuccess()
     {
-        var result = await loginService.Login(UserCredentials.ValidEmail, UserCredentials.ValidPassword);
+        var result = await loginService.Login(TestDALConstants.TEST_EMAIL, TestDALConstants.TEST_PASSWORD);
 
         Assert.IsTrue(result.IsSuccess);
         Assert.IsNotNull(result.Value);

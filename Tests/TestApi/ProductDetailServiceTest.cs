@@ -22,9 +22,9 @@ private Mock<ILogger<ProductDetailService>> mockLogger;
                 [TestMethod]
         public async Task GetProduct_ValidApiResponse_ReturnsProductList()
         {
-            var result = await productDetailService.GetProduct("67c6272bae0270964cdb5293");
+            var result = await productDetailService.GetProduct("67d9ed2b394c8a439a8aa443");
 
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Value);
             Assert.IsTrue(result.IsSuccess);
         }
 }

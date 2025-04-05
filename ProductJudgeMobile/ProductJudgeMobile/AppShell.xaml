@@ -12,6 +12,7 @@
     xmlns:listProducts="clr-namespace:ProductJudgeMobile.Features.ListProducts"
     xmlns:productDetail="clr-namespace:ProductJudgeMobile.Features.ProductDetail"
     xmlns:newProduct="clr-namespace:ProductJudgeMobile.Features.NewProduct"
+    xmlns:profile="clr-namespace:ProductJudgeMobile.Features.Profile"
     xmlns:infra="clr-namespace:ProductJudgeMobile.Infrastructure"
     Title="ProductJudgeMobile">
 
@@ -30,16 +31,16 @@
     <TabBar
         Route="{x:Static infra:PageRoutes.Home}">
         <Tab
-            Title="Cats"
-            Icon="cat.png">
+            Title="Productos"
+            Icon="list_icon.png">
             <ShellContent
-                ContentTemplate="{DataTemplate main:MainPage}" />
+                ContentTemplate="{DataTemplate listProducts:ListProductsPage}" />
         </Tab>
         <Tab
-            Title="Dogs"
-            Icon="dog.png">
+            Title="Perfil"
+            Icon="profile_icon.png">
             <ShellContent
-                ContentTemplate="{DataTemplate main:MainPage}" />
+                ContentTemplate="{DataTemplate profile:ProfilePage}" />
         </Tab>
     </TabBar>
     

@@ -11,6 +11,7 @@ using ProductJudgeMobile.Features.Register;
 using ProductJudgeMobile.Features.ScannerCheckProduct;
 using CommunityToolkit.Maui;
 using ProductJudgeMobile.Services;
+using ProductJudgeMobile.Features.Profile;
 
 
 
@@ -38,6 +39,9 @@ internal static class AppBuilderExtensions
         builder.Services.AddTransient<ProductDetailViewModel>();
         builder.Services.AddTransient<NewProductPage>();
         builder.Services.AddTransient<NewProductViewModel>();
+        builder.Services.AddTransient<ProfileViewModel>();
+        builder.Services.AddTransient<ProfilePage>();
+
 
         builder.Services.AddTransient<LoginService>();
         builder.Services.AddTransient<RegisterService>();

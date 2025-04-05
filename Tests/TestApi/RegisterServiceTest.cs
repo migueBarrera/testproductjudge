@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Moq;
+using ProductJudge.Mobile.DAL;
 using ProductJudge.Mobile.DAL.Services;
 
 namespace TestApi;
@@ -21,7 +22,7 @@ public class RegisterServiceTest
     [TestMethod]
     public async Task Register_ValidCredentials_ReturnsSuccess()
     {
-        var result = await registerService.Register(UserCredentials.ValidEmail, UserCredentials.ValidEmail, UserCredentials.ValidPassword);
+        var result = await registerService.Register(TestDALConstants.TEST_USER, TestDALConstants.TEST_EMAIL, TestDALConstants.TEST_PASSWORD);
 
         Assert.IsTrue(result.IsSuccess);
         Assert.IsNotNull(result.Value);

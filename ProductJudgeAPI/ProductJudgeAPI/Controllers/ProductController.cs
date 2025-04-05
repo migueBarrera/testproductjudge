@@ -23,7 +23,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<GetProductByIdResponse>>> GetByCategoryId(string id, CancellationToken cancellationToken = default)
+    public async Task<ActionResult<GetProductByIdResponse>> GetById(string id, CancellationToken cancellationToken = default)
     {
         var response = await _mediator.Send(new GetProductByIdRequest(){Id = id}, cancellationToken);
         return Ok(response);

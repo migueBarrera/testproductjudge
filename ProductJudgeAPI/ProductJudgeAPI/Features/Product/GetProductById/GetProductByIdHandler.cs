@@ -24,14 +24,14 @@ public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, GetP
         var filter = Builders<Entities.Product>.Filter.Eq(u => u.Id, request.Id);
         var items = await applicationDbContext.GetAsync(filter);
 
-        Ensure.That(items != null || items!.Count > 0, ExceptionMessagesConstants.InvalidCredentials);
+        Ensure.That(items != null || items!.Count > 0, ExceptionMessagesConstants.ProductNotFound);
 
         var item = items!.FirstOrDefault();
 
         var filterJudges = Builders<Entities.Judge>.Filter.Eq(u => u.ProductId, item!.Id!);
         var itemsJudges = await judgeService.GetAsync(filterJudges);
 
-        return new GetProductByIdResponse()
+        var response = new GetProductByIdResponse()
         {
             Id = item!.Id!,
             Name = item.Name,
@@ -46,5 +46,6 @@ public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, GetP
                 ProductId = j.ProductId
             }) ?? []
         };
+        return response;
     }
 }
